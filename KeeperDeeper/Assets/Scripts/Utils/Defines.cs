@@ -4,8 +4,14 @@ public class Defines
 {
     public enum KeyInputType
     {
-        None,
         Down,
+        Press,
         Up
+    }
+
+    public enum MoveDirection
+    {
+        Left,
+        Right
     }
 }

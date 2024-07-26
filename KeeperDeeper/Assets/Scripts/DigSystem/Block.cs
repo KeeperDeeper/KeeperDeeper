@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DrillObject;
+using UnityEngine.UI;
 
 public class Block : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Block : MonoBehaviour
     void Start()
     {
         blockInformation.Init();
+        this.gameObject.GetComponent<Image>().sprite = blockInformation.blockImg;
         lifeTime = blockInformation.diggingTime;
     }
 

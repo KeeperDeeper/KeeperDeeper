@@ -12,6 +12,7 @@ public struct BlockInfo
 [CreateAssetMenu(fileName = "", menuName = "Block", order = 0)]
 public class BlockInformation : ScriptableObject
 {
+    public Sprite blockImg;
     public BlockInfo blockInfo;
     public BlockInfo.BlockStrength blockStr;
     public float diggingTime;

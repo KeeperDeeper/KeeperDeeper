@@ -63,7 +63,8 @@ public class PlayerController : MonoBehaviour, IKeyInput
                     }
                     if (keyCode == KeyCode.Tab)
                     {
-                        Managers.UIManager.CreateUI();
+                        if (Managers.UIManager.CheckUIMountMargin(Defines.UIType.Inventory, Values.UI_MOUNT_MARGIN_INVENTORY))
+                            Managers.UIManager.CreateUI(Defines.UIType.Inventory);
                     }
                     if (keyCode == KeyCode.Escape)
                     {

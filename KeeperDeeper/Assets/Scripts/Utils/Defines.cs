@@ -14,4 +14,9 @@ public class Defines
         Left,
         Right
     }
+
+    public enum UIType
+    {
+        Inventory
+    }
 }

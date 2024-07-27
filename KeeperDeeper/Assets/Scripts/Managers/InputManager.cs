@@ -19,6 +19,10 @@ public class InputManager : IManagers
             #region KeyDown
             if (Input.GetKeyDown(KeyCode.Space))
                 keyAction.Invoke(KeyCode.Space, Defines.KeyInputType.Down);
+            if (Input.GetKeyDown(KeyCode.Tab))
+                keyAction.Invoke(KeyCode.Tab, Defines.KeyInputType.Down);
+            if (Input.GetKeyDown(KeyCode.Escape))
+                keyAction.Invoke(KeyCode.Escape, Defines.KeyInputType.Down);
             #endregion
 
             #region KeyPress

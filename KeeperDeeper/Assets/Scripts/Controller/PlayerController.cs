@@ -61,6 +61,14 @@ public class PlayerController : MonoBehaviour, IKeyInput
                         if (isGround)
                             Jump();
                     }
+                    if (keyCode == KeyCode.Tab)
+                    {
+                        Managers.UIManager.CreateUI();
+                    }
+                    if (keyCode == KeyCode.Escape)
+                    {
+                        Managers.UIManager.CloseUI();
+                    }
                     break;
                 }
             case Defines.KeyInputType.Press:

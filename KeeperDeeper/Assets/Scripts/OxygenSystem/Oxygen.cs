@@ -20,6 +20,9 @@ namespace OxygenSystem
         private const int consume = 1;//기본 산소 소모량
         private float countTime = 1; //시간 카운트
 
+        public bool check;
+        public bool endGame;
+
         private void Awake()
         {
             
@@ -69,9 +72,22 @@ namespace OxygenSystem
         public void RecoveryOxygen()
         {
             //체크포인트 지날시 산소게이지 50%회복
-            oxyCapacity += maxOxyCapacity * 0.5f;
+            if (check)
+            {
+                check = false;
+                oxyCapacity += maxOxyCapacity * 0.5f;
+                //최대 산소 저장량을 넘겼을 때
+                if (oxyCapacity >= maxOxyCapacity)
+                {
+                    oxyCapacity = maxOxyCapacity; //최대 산소 저장량으로 변경
+                }
+            }
             //마을로 복귀시 산소게이지 100% 회복
-            oxyCapacity = maxOxyCapacity;
+            else if (endGame)
+            {
+                endGame = false;
+                oxyCapacity = maxOxyCapacity;
+            }
         }
     }
 }

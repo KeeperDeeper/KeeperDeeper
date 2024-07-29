@@ -39,7 +39,7 @@ public class UIManager : IManagers
     {
         dynamicUICount++;
         uiCountsByType[uiType]++;
-        GameObject uiObj = GameObject.Instantiate(Resources.Load<GameObject>($"Prefabs/{uiType}"), mainCanvasTransform);
+        GameObject uiObj = UnityEngine.Object.Instantiate(Resources.Load<GameObject>($"Prefabs/UI/UI_{uiType}"), mainCanvasTransform);
         uiList.Add(uiObj.GetComponent<UI_Base>());
         uiList[dynamicUICount - 1].SetUIType(uiType);
     }

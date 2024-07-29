@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2312cf49b7017a846a4e2b00f3826d11, type: 3}
   m_Name: BlockLv0
   m_EditorClassIdentifier: 
-  blockStr: 0
-  diggingTime: 0
+  blockImg: {fileID: 0}
+  blockStr: 2
+  diggingTime: 3

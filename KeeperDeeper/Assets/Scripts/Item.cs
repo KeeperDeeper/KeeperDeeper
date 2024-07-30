@@ -1,18 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public int itemId;
+    public string itemName;
+    public Sprite itemImg;
+
+    public Item(int itemId, string itemName, Sprite itemImg)
     {
-        
+        this.itemId = itemId;
+        this.itemName = itemName;
+        this.itemImg = itemImg;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        
+        if (collision != null)
+        {
+            if (collision.transform.tag == "Player")
+            {
+                Managers.DataManager.playerInventory.AddItem(this);
+                Destroy(gameObject);
+            }
+        }
     }
 }

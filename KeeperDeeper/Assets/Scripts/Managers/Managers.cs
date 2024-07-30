@@ -13,9 +13,11 @@ public class Managers : MonoBehaviour
     #region 기타 매니저 인스턴스
     private static InputManager _inputManager = new InputManager();
     private static UIManager _uiManager = new UIManager();
+    private static DataManager _dataManager = new DataManager();
 
     public static InputManager InputManager { get { return _inputManager; } }
     public static UIManager UIManager { get { return _uiManager; } }
+    public static DataManager DataManager { get { return _dataManager; } }
     #endregion
 
 
@@ -58,5 +60,6 @@ public class Managers : MonoBehaviour
 
         InputManager.Init();
         UIManager.Init();
+        DataManager.Init();
     }
 }

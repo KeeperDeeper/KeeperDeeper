@@ -13,6 +13,15 @@ public class Item : MonoBehaviour
         this.itemImg = itemImg;
     }
 
+    private void Awake()
+    {
+        if (gameObject != null)
+        {
+            name = itemName;
+            GetComponent<SpriteRenderer>().sprite = itemImg;
+        }
+    }
+
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision != null)

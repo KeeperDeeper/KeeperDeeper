@@ -3,22 +3,14 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     public int itemId;
-    public string itemName;
-    public Sprite itemImg;
 
-    public Item(int itemId, string itemName, Sprite itemImg)
+    private void Start()
     {
-        this.itemId = itemId;
-        this.itemName = itemName;
-        this.itemImg = itemImg;
-    }
 
-    private void Awake()
-    {
         if (gameObject != null)
         {
-            name = itemName;
-            GetComponent<SpriteRenderer>().sprite = itemImg;
+            name = Managers.DataManager.itemDB[itemId].itemName;
+            GetComponent<SpriteRenderer>().sprite = Managers.DataManager.itemDB[itemId].itemImg;
         }
     }
 
@@ -28,7 +20,7 @@ public class Item : MonoBehaviour
         {
             if (collision.transform.tag == "Player")
             {
-                Managers.DataManager.playerInventory.AddItem(this);
+                Managers.DataManager.playerInventory.AddItem(this.itemId);
                 Destroy(gameObject);
             }
         }

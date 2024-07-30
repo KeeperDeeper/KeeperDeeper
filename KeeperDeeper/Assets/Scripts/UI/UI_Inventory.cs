@@ -15,9 +15,11 @@ public class UI_Inventory : UI_Base
         itemInstantiateTransform = transform.Find("Scroll View/Viewport/Content");
         itemUIIconPrefab = Resources.Load("Prefabs/UI/UI_Item") as GameObject;
 
-        foreach (Item item in Managers.DataManager.playerInventory.GetItemList())
+        // key = Item Id, Value = Item Mount
+        foreach (KeyValuePair<int, int> itemData in Managers.DataManager.playerInventory.GetItemList())
         {
-            Instantiate(itemUIIconPrefab, itemInstantiateTransform).GetComponent<UI_Item>().UpdateItemInfo(item);
+            GameObject itemUIIconObj = Instantiate(itemUIIconPrefab, itemInstantiateTransform);
+            itemUIIconObj.GetComponent<UI_Item>().UpdateItemInfo(itemData.Key);
         }
     }
 }

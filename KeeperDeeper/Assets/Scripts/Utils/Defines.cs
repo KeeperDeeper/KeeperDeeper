@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using static UnityEditor.Progress;
 
 public class Defines
 {
@@ -22,24 +23,29 @@ public class Defines
 
     public class PlayerInventory
     {
-        List<Item> items;
+        // Key = Item ID, Value Item Mount
+        Dictionary<int, int> items;
 
         public PlayerInventory()
         {
-            items = new List<Item>();
+            items = new Dictionary<int, int>();
         }
 
-        public void AddItem(Item item)
+        public void AddItem(int itemId)
         {
-            items.Add(new Item(item.itemId, item.itemName, item.itemImg));
+            if (!items.ContainsKey(itemId))
+            {
+                items.Add(itemId, 0);
+            }
+            items[itemId] += 1;
         }
 
-        public void DropItem()
+        public void DropItem(int itemId)
         {
 
         }
 
-        public List<Item> GetItemList()
+        public Dictionary<int, int> GetItemList()
         {
             return items;
         }

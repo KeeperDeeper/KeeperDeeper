@@ -9,11 +9,11 @@ public class UI_Item : MonoBehaviour
     public string itemName;
     public Sprite itemImg;
 
-    public void UpdateItemInfo(Item item)
+    public void UpdateItemInfo(int itemId)
     {
-        itemId = item.itemId;
-        itemName = item.itemName;
-        itemImg = item.itemImg;
+        this.itemId = itemId;
+        itemName = Managers.DataManager.itemDB[itemId].itemName;
+        itemImg = Managers.DataManager.itemDB[itemId].itemImg;
 
         name = itemName;
         GetComponent<Image>().sprite = itemImg;

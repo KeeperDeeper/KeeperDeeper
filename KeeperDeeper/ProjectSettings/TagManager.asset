@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Drill
   - CheckPoint
+  - GroundBlock
+  - FloorBlock
   layers:
   - Default
   - TransparentFX

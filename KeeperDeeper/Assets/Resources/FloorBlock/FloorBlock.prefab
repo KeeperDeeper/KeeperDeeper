@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 9172054521240256679}
   - component: {fileID: 9172054521240256682}
   - component: {fileID: 9172054521240256681}
-  - component: {fileID: 9172054521240256683}
+  - component: {fileID: 7988876910437008880}
   m_Layer: 5
-  m_Name: Lv0Block
-  m_TagString: GroundBlock
+  m_Name: FloorBlock
+  m_TagString: FloorBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39,7 +39,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 192, y: 108}
+  m_SizeDelta: {x: 1920, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9172054521240256680
 CanvasRenderer:
@@ -62,14 +62,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.20392157}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 89c7f1538544db340b4c560445e422b2, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -110,7 +110,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -124,9 +124,9 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 192, y: 108}
+  m_Size: {x: 1920, y: 120}
   m_EdgeRadius: 0
---- !u!114 &9172054521240256683
+--- !u!114 &7988876910437008880
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -135,8 +135,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 9172054521240256676}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6dd9fb7c6b1be00489513f8f1553bbd7, type: 3}
+  m_Script: {fileID: 11500000, guid: 75a0f4cc3f92f7d48883ae98512bbb7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockInformation: {fileID: 11400000, guid: e1faf85849eec2e4c918033e631e0c50, type: 2}
-  lifeTime: 0
+  floorManager: {fileID: 0}
+  blockObj: []
+  floorNum: 0

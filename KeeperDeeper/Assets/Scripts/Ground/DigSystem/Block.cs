@@ -11,7 +11,7 @@ public class Block : MonoBehaviour
     void Start()
     {
         blockInformation.Init();
-        this.gameObject.GetComponent<Image>().sprite = blockInformation.blockImg;
+        //this.gameObject.GetComponent<Image>().sprite = blockInformation.blockImg;
         lifeTime = blockInformation.diggingTime;
     }
 

@@ -23,10 +23,6 @@ namespace OxygenSystem
         public bool check;
         public bool endGame;
 
-        private void Awake()
-        {
-            
-        }
         void Start()
         {
             InitOxygenTank();

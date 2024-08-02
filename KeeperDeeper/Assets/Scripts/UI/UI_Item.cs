@@ -1,21 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UI_Item : MonoBehaviour
+public class UI_Item : MonoBehaviour, IPointerClickHandler
 {
     public int itemId;
-    public string itemName;
-    public Sprite itemImg;
 
     public void UpdateItemInfo(int itemId)
     {
         this.itemId = itemId;
-        itemName = Managers.DataManager.itemDB[itemId].itemName;
-        itemImg = Managers.DataManager.itemDB[itemId].itemImg;
 
-        name = itemName;
-        GetComponent<Image>().sprite = itemImg;
+        name = Managers.DataManager.itemDB[itemId].itemName;
+        GetComponent<Image>().sprite = Managers.DataManager.itemDB[itemId].itemImg;
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            Managers.DataManager.playerInventory.dropItemAction.Invoke(itemId, 1);
+        }
     }
 }

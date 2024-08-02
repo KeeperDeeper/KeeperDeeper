@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +14,19 @@ public class UI_Inventory : UI_Base
         itemInstantiateTransform = transform.Find("Scroll View/Viewport/Content");
         itemUIIconPrefab = Resources.Load("Prefabs/UI/UI_Item") as GameObject;
 
-        // key = Item Id, Value = Item Mount
+        ShowInventory();
+
+        Managers.DataManager.playerInventory.inventoryRefreshAction += ShowInventory;
+    }
+
+    private void ShowInventory()
+    {
+        foreach (Transform child in itemInstantiateTransform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // Key = Item Id, Value = Item Mount
         foreach (KeyValuePair<int, int> itemData in Managers.DataManager.playerInventory.GetItemList())
         {
             GameObject itemUIIconObj = Instantiate(itemUIIconPrefab, itemInstantiateTransform);

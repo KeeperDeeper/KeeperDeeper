@@ -1,5 +1,5 @@
+using System;
 using System.Collections.Generic;
-using static UnityEditor.Progress;
 
 public class Defines
 {
@@ -23,8 +23,13 @@ public class Defines
 
     public class PlayerInventory
     {
-        // Key = Item ID, Value Item Mount
-        Dictionary<int, int> items;
+        // Param = Item ID, Item Mount
+        public Action<int, int> dropItemAction;
+
+        public Action inventoryRefreshAction;
+
+        // Key = Item ID, Value = Item Mount
+        private Dictionary<int, int> items;
 
         public PlayerInventory()
         {
@@ -40,9 +45,14 @@ public class Defines
             items[itemId] += 1;
         }
 
-        public void DropItem(int itemId)
+        public void DropItem(int itemId, int mount)
         {
-
+            items[itemId] -= mount;
+            if (items[itemId] <= 0)
+            {
+                items.Remove(itemId);
+            }
+            inventoryRefreshAction.Invoke();
         }
 
         public Dictionary<int, int> GetItemList()

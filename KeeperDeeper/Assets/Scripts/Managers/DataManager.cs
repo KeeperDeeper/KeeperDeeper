@@ -9,6 +9,8 @@ public class DataManager : IManagers
     // Key = Item ID, Value = Item SO
     public Dictionary<int, ItemSO> itemDB = new Dictionary<int, ItemSO>();
 
+    public GameObject itemObj;
+
     public void Init()
     {
         playerInventory = new PlayerInventory();
@@ -16,5 +18,6 @@ public class DataManager : IManagers
         {
             itemDB.Add(itemSO.itemId, itemSO);
         }
+        itemObj = Resources.Load("Prefabs/Item") as GameObject;
     }
 }

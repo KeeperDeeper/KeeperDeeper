@@ -9,15 +9,18 @@ public class UI_Dialogue : UI_Base, IMouseInput
     private const string nameDir = "BG_Name/Value";
     private const string dialogueDir = "BG_Dialogue/Value";
 
-    private TextMeshProUGUI nameText;
-    private TextMeshProUGUI dialogueText;
+    private TextMeshProUGUI nameTMP;
+    private TextMeshProUGUI dialogueTMP;
+    private Coroutine currentTextAnimation;
+    private string dialogueText;
     private int currentIdx;
     private bool isEnd;
+    private bool isAnimaionPlaying;
 
     private void Start()
     {
-        nameText = transform.Find(nameDir).GetComponent<TextMeshProUGUI>();
-        dialogueText = transform.Find(dialogueDir).GetComponent<TextMeshProUGUI>();
+        nameTMP = transform.Find(nameDir).GetComponent<TextMeshProUGUI>();
+        dialogueTMP = transform.Find(dialogueDir).GetComponent<TextMeshProUGUI>();
         currentIdx = 0;
 
         Managers.InputManager.mouseInputAction += MouseInput;
@@ -27,15 +30,28 @@ public class UI_Dialogue : UI_Base, IMouseInput
 
     public void UpdateDialogue()
     {
+        dialogueTMP.text = "";
         if (isEnd)
         {
             Managers.InputManager.mouseInputAction -= MouseInput;
             Destroy(gameObject);
         }
-        nameText.text = Managers.DialogueManager.currentDialogue.dialogueDatas[currentIdx].name;
-        dialogueText.text = Managers.DialogueManager.currentDialogue.dialogueDatas[currentIdx].dialogue;
+        nameTMP.text = Managers.DialogueManager.currentDialogue.dialogueDatas[currentIdx].name;
+        dialogueText = Managers.DialogueManager.currentDialogue.dialogueDatas[currentIdx].dialogue;
+        currentTextAnimation = StartCoroutine(DialogueTextAnimation(Managers.DialogueManager.currentDialogue.dialogueDatas[currentIdx].textAnimationSpeed));
         isEnd = Managers.DialogueManager.currentDialogue.dialogueDatas[currentIdx].isEnd;
         currentIdx = Managers.DialogueManager.currentDialogue.dialogueDatas[currentIdx].nextIdx;
+    }
+
+    IEnumerator DialogueTextAnimation(float speed)
+    {
+        isAnimaionPlaying = true;
+        for (int i = 0; i < dialogueText.Length; i++)
+        {
+            dialogueTMP.text += dialogueText[i];
+            yield return new WaitForSeconds(speed);
+        }
+        isAnimaionPlaying = false;
     }
 
     public void MouseInput(MouseButton button, Defines.MouseInputType inputType)
@@ -46,7 +62,16 @@ public class UI_Dialogue : UI_Base, IMouseInput
                 {
                     if (button == MouseButton.Left)
                     {
-                        UpdateDialogue();
+                        if (isAnimaionPlaying)
+                        {
+                            StopCoroutine(currentTextAnimation);
+                            dialogueTMP.text = dialogueText;
+                            isAnimaionPlaying = false;
+                        }
+                        else
+                        {
+                            UpdateDialogue();
+                        }
                     }
                     break;
                 }

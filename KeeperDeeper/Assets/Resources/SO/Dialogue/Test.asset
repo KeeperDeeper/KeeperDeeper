@@ -15,14 +15,17 @@ MonoBehaviour:
   dialogueId: 1
   dialogueDatas:
   - nextIdx: 1
+    textAnimationSpeed: 0.02
     name: test
     dialogue: hello
     isEnd: 0
   - nextIdx: 2
+    textAnimationSpeed: 0.02
     name: test
     dialogue: how are you
     isEnd: 0
   - nextIdx: 0
+    textAnimationSpeed: 0.2
     name: test
     dialogue: im happy
     isEnd: 1

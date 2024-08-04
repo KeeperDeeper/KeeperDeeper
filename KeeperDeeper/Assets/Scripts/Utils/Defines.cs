@@ -74,6 +74,7 @@ public class Defines
     public class DialogueData
     {
         public int nextIdx;
+        public float textAnimationSpeed;
         public string name;
         public string dialogue;
         public bool isEnd;

@@ -17,15 +17,28 @@ MonoBehaviour:
   - nextIdx: 1
     textAnimationSpeed: 0.02
     name: test
-    dialogue: hello
+    dialogue: Hello!!
     isEnd: 0
+    choices: []
   - nextIdx: 2
     textAnimationSpeed: 0.02
     name: test
-    dialogue: how are you
+    dialogue: How are you today?
     isEnd: 0
+    choices:
+    - nextIdx: 2
+      content: Not bad.
+    - nextIdx: 3
+      content: I'm happy now!
   - nextIdx: 0
-    textAnimationSpeed: 0.2
+    textAnimationSpeed: 0.1
     name: test
-    dialogue: im happy
+    dialogue: I hope you happy...
     isEnd: 1
+    choices: []
+  - nextIdx: 0
+    textAnimationSpeed: 0.02
+    name: test
+    dialogue: I'm happy too!!
+    isEnd: 1
+    choices: []

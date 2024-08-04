@@ -27,7 +27,8 @@ public class Defines
     public enum UIType
     {
         Inventory,
-        Dialogue
+        Dialogue,
+        DialogueChoice
     }
 
     public class PlayerInventory
@@ -78,5 +79,13 @@ public class Defines
         public string name;
         public string dialogue;
         public bool isEnd;
+        public List<DialogueChoiceData> choices;
+    }
+
+    [Serializable]
+    public class DialogueChoiceData
+    {
+        public int nextIdx;
+        public string content;
     }
 }

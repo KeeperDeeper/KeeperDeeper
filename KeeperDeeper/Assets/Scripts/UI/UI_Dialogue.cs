@@ -1,10 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class UI_Dialogue : UI_Base, IMouseInput
+public class UI_Dialogue : UI_Base, IPointerClickHandler
 {
     private const string nameDir = "BG_Name/Value";
     private const string dialogueDir = "BG_Dialogue/Value";
@@ -22,9 +21,7 @@ public class UI_Dialogue : UI_Base, IMouseInput
         nameTMP = transform.Find(nameDir).GetComponent<TextMeshProUGUI>();
         dialogueTMP = transform.Find(dialogueDir).GetComponent<TextMeshProUGUI>();
         currentIdx = 0;
-
-        Managers.InputManager.mouseInputAction += MouseInput;
-
+        Managers.DialogueManager.dialogueChoiceSelectAction += ChoiceSelect;
         UpdateDialogue();
     }
 
@@ -33,14 +30,19 @@ public class UI_Dialogue : UI_Base, IMouseInput
         dialogueTMP.text = "";
         if (isEnd)
         {
-            Managers.InputManager.mouseInputAction -= MouseInput;
+            Managers.DialogueManager.dialogueChoiceSelectAction -= ChoiceSelect;
             Destroy(gameObject);
         }
         nameTMP.text = Managers.DialogueManager.currentDialogue.dialogueDatas[currentIdx].name;
         dialogueText = Managers.DialogueManager.currentDialogue.dialogueDatas[currentIdx].dialogue;
         currentTextAnimation = StartCoroutine(DialogueTextAnimation(Managers.DialogueManager.currentDialogue.dialogueDatas[currentIdx].textAnimationSpeed));
         isEnd = Managers.DialogueManager.currentDialogue.dialogueDatas[currentIdx].isEnd;
-        currentIdx = Managers.DialogueManager.currentDialogue.dialogueDatas[currentIdx].nextIdx;
+    }
+
+    private void ChoiceSelect(int choiceIdx)
+    {
+        currentIdx = Managers.DialogueManager.currentDialogue.dialogueDatas[currentIdx].choices[choiceIdx].nextIdx;
+        UpdateDialogue();
     }
 
     IEnumerator DialogueTextAnimation(float speed)
@@ -52,29 +54,38 @@ public class UI_Dialogue : UI_Base, IMouseInput
             yield return new WaitForSeconds(speed);
         }
         isAnimaionPlaying = false;
+        if (Managers.DialogueManager.currentDialogue.dialogueDatas[currentIdx].choices.Count > 0)
+        {
+            Managers.DialogueManager.TriggerDialogueChoice(Managers.DialogueManager.currentDialogue.dialogueDatas[currentIdx].choices);
+        }
+        else
+        {
+            currentIdx = Managers.DialogueManager.currentDialogue.dialogueDatas[currentIdx].nextIdx;
+        }
     }
 
-    public void MouseInput(MouseButton button, Defines.MouseInputType inputType)
+    public void OnPointerClick(PointerEventData eventData)
     {
-        switch (inputType)
+        if (eventData.button == PointerEventData.InputButton.Left)
         {
-            case Defines.MouseInputType.Down:
+            if (isAnimaionPlaying)
+            {
+                StopCoroutine(currentTextAnimation);
+                dialogueTMP.text = dialogueText;
+                isAnimaionPlaying = false;
+                if (Managers.DialogueManager.currentDialogue.dialogueDatas[currentIdx].choices.Count > 0)
                 {
-                    if (button == MouseButton.Left)
-                    {
-                        if (isAnimaionPlaying)
-                        {
-                            StopCoroutine(currentTextAnimation);
-                            dialogueTMP.text = dialogueText;
-                            isAnimaionPlaying = false;
-                        }
-                        else
-                        {
-                            UpdateDialogue();
-                        }
-                    }
-                    break;
+                    Managers.DialogueManager.TriggerDialogueChoice(Managers.DialogueManager.currentDialogue.dialogueDatas[currentIdx].choices);
                 }
+                else
+                {
+                    currentIdx = Managers.DialogueManager.currentDialogue.dialogueDatas[currentIdx].nextIdx;
+                }
+            }
+            else
+            {
+                UpdateDialogue();
+            }
         }
     }
 }

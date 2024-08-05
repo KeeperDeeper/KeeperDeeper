@@ -14,10 +14,12 @@ public class Managers : MonoBehaviour
     private static InputManager _inputManager = new InputManager();
     private static UIManager _uiManager = new UIManager();
     private static DataManager _dataManager = new DataManager();
+    private static DialogueManager _dialogueManager = new DialogueManager();
 
     public static InputManager InputManager { get { return _inputManager; } }
     public static UIManager UIManager { get { return _uiManager; } }
     public static DataManager DataManager { get { return _dataManager; } }
+    public static DialogueManager DialogueManager { get { return _dialogueManager; } }
     #endregion
 
 
@@ -61,5 +63,6 @@ public class Managers : MonoBehaviour
         InputManager.Init();
         UIManager.Init();
         DataManager.Init();
+        DialogueManager.Init();
     }
 }

@@ -35,13 +35,15 @@ public class UIManager : IManagers
         return uiCountsByType[uiType] < mount;
     }
 
-    public void CreateUI(Defines.UIType uiType)
+    public GameObject CreateUI(Defines.UIType uiType)
     {
         dynamicUICount++;
         uiCountsByType[uiType]++;
         GameObject uiObj = UnityEngine.Object.Instantiate(Resources.Load<GameObject>($"Prefabs/UI/UI_{uiType}"), mainCanvasTransform);
         uiList.Add(uiObj.GetComponent<UI_Base>());
         uiList[dynamicUICount - 1].SetUIType(uiType);
+
+        return uiObj;
     }
 
     public void CloseUI()

@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6f6a37a19b580e45a0d53a3297e9610, type: 3}
+  m_Name: Test
+  m_EditorClassIdentifier: 
+  dialogueId: 1
+  dialogueDatas:
+  - nextIdx: 1
+    textAnimationSpeed: 0.02
+    name: test
+    dialogue: Hello!!
+    isEnd: 0
+    choices: []
+  - nextIdx: 2
+    textAnimationSpeed: 0.02
+    name: test
+    dialogue: How are you today?
+    isEnd: 0
+    choices:
+    - nextIdx: 2
+      content: Not bad.
+    - nextIdx: 3
+      content: I'm happy now!
+  - nextIdx: 0
+    textAnimationSpeed: 0.1
+    name: test
+    dialogue: I hope you happy...
+    isEnd: 1
+    choices: []
+  - nextIdx: 0
+    textAnimationSpeed: 0.02
+    name: test
+    dialogue: I'm happy too!!
+    isEnd: 1
+    choices: []

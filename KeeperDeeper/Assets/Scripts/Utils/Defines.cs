@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class Defines
 {
@@ -7,6 +8,13 @@ public class Defines
     {
         Down,
         Press,
+        Up
+    }
+
+    public enum MouseInputType
+    {
+        Down,
+        Drag,
         Up
     }
 
@@ -18,7 +26,9 @@ public class Defines
 
     public enum UIType
     {
-        Inventory
+        Inventory,
+        Dialogue,
+        DialogueChoice
     }
 
     public class PlayerInventory
@@ -59,5 +69,23 @@ public class Defines
         {
             return items;
         }
+    }
+
+    [Serializable]
+    public class DialogueData
+    {
+        public int nextIdx;
+        public float textAnimationSpeed;
+        public string name;
+        public string dialogue;
+        public bool isEnd;
+        public List<DialogueChoiceData> choices;
+    }
+
+    [Serializable]
+    public class DialogueChoiceData
+    {
+        public int nextIdx;
+        public string content;
     }
 }

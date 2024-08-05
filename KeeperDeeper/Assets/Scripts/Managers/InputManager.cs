@@ -5,6 +5,7 @@ using UnityEngine;
 public class InputManager : IManagers
 {
     public Action<KeyCode, Defines.KeyInputType> keyAction;
+    public Action<MouseButton, Defines.MouseInputType> mouseInputAction;
 
     public void Init()
     {
@@ -35,6 +36,16 @@ public class InputManager : IManagers
 
             #region KeyUp
 
+            #endregion
+        }
+
+        if (mouseInputAction != null)
+        {
+            #region MouseDown
+            if (Input.GetMouseButtonDown((int)MouseButton.Left))
+                mouseInputAction.Invoke(MouseButton.Left, Defines.MouseInputType.Down);
+            if (Input.GetMouseButtonDown((int)MouseButton.Right))
+                mouseInputAction.Invoke(MouseButton.Right, Defines.MouseInputType.Down);
             #endregion
         }
     }

@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -42,12 +43,22 @@ namespace FloorManagement
             playerFloor = floor;
             floorNumber.text = $"지하 {playerFloor.ToString()}층";
         }
+
         [ContextMenu("ResetStage")]
+        //스테이지 초기화시
         public void ResetStageBlock()
         {
             for (int i = 0; i < floors.Length; i++)
             {
                 floors[i].ActiveFloorBlock(); //모든 층의 블럭 초기화
+            }
+        }
+        //층수 블럭만 초기화 해야할 때
+        public void ResetFloor(int floor)
+        {
+            for (int i = floor; i < floors.Length; i++)
+            {
+                floors[i].ResetFloor();
             }
         }
     }

@@ -28,7 +28,13 @@ public class Floor : MonoBehaviour
         {
             blockObj[i].blockInformation.blockInfo.active = true;
             blockObj[i].gameObject.SetActive(true);
-            floorBlock.gameObject.SetActive(true);
+            ResetFloor();
         }
+    }
+    public void ResetFloor()
+    {
+        //층수 블럭 초기화 - 게임초기화 및 재도전시 초기화
+        //체크포인트에서 시작시 미적용
+        floorBlock.gameObject.SetActive(true);
     }
 }

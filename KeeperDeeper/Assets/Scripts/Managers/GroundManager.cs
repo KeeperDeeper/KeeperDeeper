@@ -7,31 +7,23 @@ namespace GroundManagment
 {
     public class GroundManager : MonoBehaviour
     {
-        public float pressure = 0; //¶¥ ¾Ð·Â
+        public int pressure = 1; //¶¥ ¾Ð·Â
         public int undergroundFloor;
         [SerializeField]
         private Text pressureText;
-
-        private void Start()
-        {
-            ResetPressure();
-        }
 
         //Ãþ¼ö Ä«¿îÆÃ
         public void CountUnderGroundFloor()
         {
             undergroundFloor += 1;
-            IncreasePressure();
+            ChangePressure();
         }
 
         //¶¥ ¾Ð·Â Áõ°¡
-        public void IncreasePressure()
+        public void ChangePressure()
         {
             //5ÃþÀÌ»ó ³»·Á°¡°Ô µÆÀ» ¶§ ex)6Ãþ 11Ãþ
-            if (undergroundFloor % 5 == 1)
-            {
-                pressure += 1;
-            }
+            pressure = undergroundFloor / 5 + 1;
             pressureText.text = $"ÇöÀç ¾Ð·Â: {pressure}";
         }
         //¶¥ ¾Ð·Â ÃÊ±âÈ­

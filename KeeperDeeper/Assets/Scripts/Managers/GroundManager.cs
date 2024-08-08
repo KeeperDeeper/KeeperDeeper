@@ -7,7 +7,7 @@ namespace GroundManagment
 {
     public class GroundManager : MonoBehaviour
     {
-        public float pressure = 1; //¶¥ ¾Ð·Â
+        public float pressure = 0; //¶¥ ¾Ð·Â
         public int undergroundFloor;
         [SerializeField]
         private Text pressureText;

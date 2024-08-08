@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9172054521240256679}
   - component: {fileID: 9172054521240256682}
   - component: {fileID: 9172054521240256681}
-  - component: {fileID: 7988876910437008880}
+  - component: {fileID: 490677441154511010}
   m_Layer: 5
   m_Name: FloorBlock
   m_TagString: FloorBlock
@@ -126,7 +126,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1920, y: 120}
   m_EdgeRadius: 0
---- !u!114 &7988876910437008880
+--- !u!114 &490677441154511010
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -135,9 +135,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 9172054521240256676}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75a0f4cc3f92f7d48883ae98512bbb7d, type: 3}
+  m_Script: {fileID: 11500000, guid: be8f46934e889364295a1ff96a73ad64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   floorManager: {fileID: 0}
-  blockObj: []
+  groundManager: {fileID: 0}
   floorNum: 0

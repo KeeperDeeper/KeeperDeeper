@@ -32,9 +32,8 @@ namespace FloorManagement
             //층수 붙이기
             for (int i = 0; i<floors.Length; i++)
             {
-                Debug.Log(i);
-                floors[i].GetComponent<Floor>().floorNum = i+1;
-                floors[i].GetComponent<Floor>().floorManager = this;
+                floors[i].GetComponentInChildren<FloorBlock>().floorNum = i+1;
+                floors[i].GetComponentInChildren<FloorBlock>().floorManager = this;
             }
         }
 
@@ -42,6 +41,14 @@ namespace FloorManagement
         {
             playerFloor = floor;
             floorNumber.text = $"지하 {playerFloor.ToString()}층";
+        }
+        [ContextMenu("ResetStage")]
+        public void ResetStageBlock()
+        {
+            for (int i = 0; i < floors.Length; i++)
+            {
+                floors[i].ActiveFloorBlock(); //모든 층의 블럭 초기화
+            }
         }
     }
 }

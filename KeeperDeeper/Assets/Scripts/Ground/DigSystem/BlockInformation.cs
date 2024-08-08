@@ -5,8 +5,9 @@ using UnityEngine;
 
 public struct BlockInfo
 {
-    public enum BlockStrength { Lv0, Lv1, Lv2 }; //블럭 분류
+    public enum BlockStrength { Lv0, Lv1, Lv2,  Lv3 }; //블럭 분류
     public float blockLife; //굴착해하는 시간
+    public bool active;
 }
 
 [CreateAssetMenu(fileName = "", menuName = "Block", order = 0)]

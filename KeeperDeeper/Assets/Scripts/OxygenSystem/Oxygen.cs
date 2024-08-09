@@ -85,5 +85,10 @@ namespace OxygenSystem
                 oxyCapacity = maxOxyCapacity;
             }
         }
+
+        public void DecreaseOxygen(int damage)
+        {
+            oxyCapacity -= damage; //몬스터에 의한 산소 차감
+        }
     }
 }

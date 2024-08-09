@@ -11,7 +11,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/HGTestScene.unity
     guid: 779f5044103a29b4cb6d4707943dd944
-  - enabled: 1
-    path: Assets/Scenes/HGTest2.unity
-    guid: a20a7fc49324f9745832f95da2a92385
   m_configObjects: {}

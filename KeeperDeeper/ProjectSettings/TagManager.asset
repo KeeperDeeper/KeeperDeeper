@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Drill
+  - CheckPoint
+  - GroundBlock
+  - FloorBlock
   layers:
   - Default
   - TransparentFX

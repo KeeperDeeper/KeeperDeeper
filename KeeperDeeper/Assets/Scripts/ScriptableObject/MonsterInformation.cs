@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum MonsterState { Move, Chase }
+public enum MonsterState { Wait, Move, Chase, Die }
+public enum MonsterCombat { None, Damage }
+public enum MonsterMove { Left, Right, Stop };
 public struct MonsterInfo
 {
     public string monsterName; //몬스터 이름

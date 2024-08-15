@@ -18,9 +18,20 @@ namespace Monster
                 PlayerScan();
             }
         }
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                GetOutOfScanner();
+            }
+        }
         private void PlayerScan()
         {
             this.monster.monState = MonsterState.Chase;
+        }
+        private void GetOutOfScanner()
+        {
+            this.monster.monState = MonsterState.Move;
         }
     }
 }

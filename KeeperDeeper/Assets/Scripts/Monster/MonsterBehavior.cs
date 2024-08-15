@@ -13,8 +13,7 @@ namespace Monster
         public MonsterCombat monCombat;
         public MonsterMove monMove;
 
-        [SerializeField]
-        private MonsterInformation monInfo;
+        public MonsterInformation monInfo;
         private Oxygen oxygen;
 
         private Rigidbody2D rigid;
@@ -23,10 +22,6 @@ namespace Monster
         private Animator animator;
 
         private Image monSprite;
-        private Vector2 spawnPoint;
-        private Vector2 curPosition;
-        private Vector2 leftPoint;
-        private Vector2 rightPoint;
         private Transform target;
 
         public float blinkTime;
@@ -41,17 +36,17 @@ namespace Monster
             animator = GetComponent<Animator>();
 
             monSprite = GetComponent<Image>();
-            spawnPoint = this.transform.position;
-            curPosition = spawnPoint;
-
-            monState = MonsterState.Wait;
-            monCombat = MonsterCombat.None;
-            MovePattern(); //첫 행동패턴 설정
         }
 
         void Start()
         {
             monInfo.InitMonster();
+
+            monState = MonsterState.Wait;
+            monCombat = MonsterCombat.None;
+            MovePattern(); //첫 행동패턴 설정
+
+            transform.GetComponentInChildren<PlayerScanner>().SetScannerSize();
         }
 
         private void Update()
@@ -95,7 +90,7 @@ namespace Monster
                 moveTime = 1;
             }
         }
-        private void MovePattern()
+        public void MovePattern()
         {
             nextMove = Random.Range(-1, 2);
             if (nextMove == -1)
@@ -119,28 +114,21 @@ namespace Monster
             if (monMove == MonsterMove.Left)
             {
                 //animator.SetInteger("WalkLeft", -1);
-                rigid.velocity = new Vector2(-100, rigid.velocity.y);
             }
             else if (monMove == MonsterMove.Right)
             {
                 //animator.SetInteger("WalkRight", 1);
-                rigid.velocity = new Vector2(100, rigid.velocity.y);
             }
             else if (monMove == MonsterMove.Stop)
             {
                 //animator.SetInt("WalkRight", 0);
-                rigid.velocity = Vector2.zero;
             }
-            else
-            {
-
-            }
+            rigid.velocity = new Vector2(nextMove * monInfo.monsterInfo.speed, rigid.velocity.y);
         }
         //플레이어 추격
         private void ChasePlayer()
         {
-            //1.추격 범위 내에 있다면 쫓아감
-            //2.추격 범위 외에 있다면 그만 쫓아오게 됨
+            rigid.velocity = new Vector2();
         }
 
         public void TakeDamage(int damage)

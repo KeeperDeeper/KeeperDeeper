@@ -31,7 +31,12 @@ namespace Monster
         }
         private void GetOutOfScanner()
         {
-            this.monster.monState = MonsterState.Move;
+            this.monster.monCombat = MonsterCombat.None;
+            this.monster.MovePattern();
+        }
+        public void SetScannerSize()
+        {
+            scanCollider.size = new Vector2(monster.monInfo.monsterInfo.scanRange, 100);
         }
     }
 }

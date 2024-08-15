@@ -10,6 +10,7 @@ TagManager:
   - GroundBlock
   - FloorBlock
   - Wall
+  - Monster
   layers:
   - Default
   - TransparentFX

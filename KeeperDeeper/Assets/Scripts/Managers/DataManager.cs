@@ -12,11 +12,15 @@ public class DataManager : IManagers
     // Key = Dialogue ID, Value = Dialogue SO
     public Dictionary <int, DialogueSO> dialogueDB = new Dictionary<int, DialogueSO>();
 
+    // Key = NPC ID, Value = NPC SO
+    public Dictionary<int, NPCSO> npcDB = new Dictionary<int, NPCSO>();
+
     public GameObject itemObj;
 
     public void Init()
     {
         playerInventory = new PlayerInventory();
+
         foreach (ItemSO itemSO in Resources.LoadAll<ItemSO>("SO/Item"))
         {
             itemDB.Add(itemSO.itemId, itemSO);
@@ -26,6 +30,12 @@ public class DataManager : IManagers
         {
             dialogueDB.Add(dialogueSO.dialogueId, dialogueSO);
         }
+
+        foreach (NPCSO npcSO in Resources.LoadAll<NPCSO>("SO/NPC"))
+        {
+            npcDB.Add(npcSO.npcId, npcSO);
+        }
+
         itemObj = Resources.Load("Prefabs/Item") as GameObject;
     }
 }

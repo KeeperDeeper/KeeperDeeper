@@ -1,11 +1,14 @@
 using UnityEngine;
 
+/* 플레이어 컨트롤러
+ * 플레이어 오브젝트에 직접 집어넣어서 
+ */
 public class PlayerController : MonoBehaviour, IKeyInput
 {
     [SerializeField]
     private float moveSpeed = 5.0f;
     [SerializeField]
-    private float jumpPower = 20.0f;
+    private float jumpPower = 5.0f;
 
     private Rigidbody2D rigidbody;
 
@@ -62,6 +65,9 @@ public class PlayerController : MonoBehaviour, IKeyInput
 
     public void KeyInput(KeyCode keyCode, Defines.KeyInputType inputType)
     {
+        if (Managers.IngameManager.isBlockInput)
+            return;
+
         switch (inputType)
         {
             case Defines.KeyInputType.Down:
@@ -79,6 +85,10 @@ public class PlayerController : MonoBehaviour, IKeyInput
                     if (keyCode == KeyCode.Escape)
                     {
                         Managers.UIManager.CloseUI();
+                    }
+                    if (keyCode == KeyCode.E)
+                    {
+                        Managers.IngameManager.TryInteract();
                     }
                     break;
                 }

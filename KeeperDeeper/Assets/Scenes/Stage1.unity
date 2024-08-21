@@ -215,7 +215,7 @@ Transform:
   m_Children:
   - {fileID: 908370121}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &301882202
 GameObject:
@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 301882204}
   - component: {fileID: 301882203}
   m_Layer: 0
-  m_Name: Player
+  m_Name: TestPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -348,7 +348,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &363456044
 GameObject:
@@ -1918,7 +1918,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1897049889
 BoxCollider2D:
@@ -2141,7 +2141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3057433197987446782, guid: 8471e3f8380f0a74683870ef8e44c10f, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3057433197987446782, guid: 8471e3f8380f0a74683870ef8e44c10f, type: 3}
       propertyPath: m_LocalPosition.x

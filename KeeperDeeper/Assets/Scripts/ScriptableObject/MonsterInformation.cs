@@ -18,7 +18,7 @@ public struct MonsterInfo
     public float attackSpeed; //공격 속도
     public int attack;
 }
-[CreateAssetMenu(fileName = "", menuName = "Monster", order = 2)]
+[CreateAssetMenu(fileName = "", menuName = "MonsterSO", order = 2)]
 public class MonsterInformation : ScriptableObject
 {
     public MonsterKind monKind;

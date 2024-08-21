@@ -22,11 +22,14 @@ public class Block : MonoBehaviour
         //땅을 파는 중일 때
         if (collision.gameObject.CompareTag("Drill"))
         {
-            lifeTime -= Time.deltaTime * collision.GetComponent<Drill>().drillPo; //드릴power에 따른 굴착시간
-            if (lifeTime <= 0)
+            if (blockInformation.blockStr != BlockStrength.Wall)
             {
-                blockInformation.blockInfo.active = false;
-                this.gameObject.SetActive(false);
+                lifeTime -= Time.deltaTime * collision.GetComponent<Drill>().drillPo; //드릴power에 따른 굴착시간
+                if (lifeTime <= 0)
+                {
+                    blockInformation.blockInfo.active = false;
+                    this.gameObject.SetActive(false);
+                }
             }
         }
     }

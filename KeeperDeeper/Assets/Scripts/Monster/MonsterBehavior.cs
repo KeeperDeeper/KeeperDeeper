@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using OxygenSystem;
 using UnityEngine.UI;
-using UnityEngine.AI;
 
 namespace Monster
 {
@@ -16,29 +15,32 @@ namespace Monster
         public MonsterInformation monInfo;
         private Oxygen oxygen;
 
-        private Rigidbody2D rigid;
+        protected Rigidbody2D rigid;
         private BoxCollider2D bodyollider;
-        private SpriteRenderer spriteRenderer;
-        private Animator animator;
+        protected Animator animator;
+        [SerializeField]
+        private SpriteRenderer monsterRenderer;
+        [SerializeField]
+        private SpriteRenderer dieEffect;
 
-        private Image monSprite;
-        private Transform target;
+        public Transform target;
+        protected float direction;
 
         public float blinkTime;
         public float moveTime = 1;
         public int nextMove;
+        protected bool move;
+        protected float playerRange;
 
         private void Awake()
         {
             rigid = GetComponent<Rigidbody2D>();
             bodyollider = GetComponent<BoxCollider2D>();
-            spriteRenderer = GetComponent<SpriteRenderer>();
+            monsterRenderer = GetComponent<SpriteRenderer>();
             animator = GetComponent<Animator>();
-
-            monSprite = GetComponent<Image>();
         }
 
-        void Start()
+        protected virtual void Start()
         {
             monInfo.InitMonster();
 
@@ -49,16 +51,16 @@ namespace Monster
             transform.GetComponentInChildren<PlayerScanner>().SetScannerSize();
         }
 
-        private void Update()
+        protected virtual void Update()
         {
-            if (monState == MonsterState.Move)
+            if (monState == MonsterState.Move && monInfo.monKind != MonsterKind.Dig)
             {
                 Timer();
             }
         }
-        private void FixedUpdate()
+        protected virtual void FixedUpdate()
         {
-            if (monState == MonsterState.Move && monCombat != MonsterCombat.Damage)
+            if (monState == MonsterState.Move && monInfo.monKind != MonsterKind.Dig)
             {
                 MoveMonster();
             }
@@ -67,7 +69,7 @@ namespace Monster
                 ChasePlayer();
             }
         }
-        private void OnCollisionEnter2D(Collision2D collision)
+        protected virtual void OnCollisionEnter2D(Collision2D collision)
         {
             //플레이어와 충돌 했다면
             if (collision.gameObject.CompareTag("Player"))
@@ -96,14 +98,17 @@ namespace Monster
             if (nextMove == -1)
             {
                 monMove = MonsterMove.Left;
+                move = true;
             }
             else if (nextMove == 0)
             {
                 monMove = MonsterMove.Stop;
+                move = false;
             }
             else if (nextMove == 1)
             {
                 monMove = MonsterMove.Right;
+                move = true;
             }
 
             monState = MonsterState.Move;
@@ -111,43 +116,79 @@ namespace Monster
         //몬스터 이동
         private void MoveMonster()
         {
+            animator.SetBool("Move", move);
             if (monMove == MonsterMove.Left)
             {
-                //animator.SetInteger("WalkLeft", -1);
+                transform.eulerAngles = new Vector3(0, 180, 0);
             }
             else if (monMove == MonsterMove.Right)
             {
-                //animator.SetInteger("WalkRight", 1);
+                transform.eulerAngles = new Vector3(0, 0, 0);
             }
-            else if (monMove == MonsterMove.Stop)
+            else
             {
-                //animator.SetInt("WalkRight", 0);
+                
             }
             rigid.velocity = new Vector2(nextMove * monInfo.monsterInfo.speed, rigid.velocity.y);
         }
-        //플레이어 추격
-        private void ChasePlayer()
+        protected virtual void ChasePlayer()
         {
-            rigid.velocity = new Vector2();
+            LookRotate(); //플레이어 바라보기
+
+            playerRange = Mathf.Sqrt(Mathf.Pow(target.position.x - transform.position.x, 2) + Mathf.Pow(target.position.y - transform.position.y, 2)); //플레이어와 거리
+
+            if (playerRange > monInfo.monsterInfo.attackRange && monInfo.monKind != MonsterKind.Dig) //공격범위보다 멀때
+            {
+                rigid.velocity = new Vector2(direction * monInfo.monsterInfo.speed, rigid.velocity.y);
+            }
+            else if(playerRange <=  monInfo.monsterInfo.attackRange)
+            {
+                //범위에 들어오면 힘 없애기;
+                rigid.velocity = Vector2.zero;
+            }
+        }
+        private void LookRotate()
+        {
+            if (monCombat == MonsterCombat.None)
+            {
+                direction = target.position.x - transform.position.x; //캐릭터가 있는 방향 X축 이용
+                direction = direction > 0 ? 1 : -1; //좌우방향
+
+                if (direction == -1)
+                {
+                    transform.eulerAngles = new Vector3(0, 180, 0);
+                }
+                else if (direction == 1)
+                {
+                    transform.eulerAngles = new Vector3(0, 0, 0);
+                }
+                else
+                {
+
+                }
+            }
+            else
+            {
+
+            }
+            //스캐너 회전각 고정
+            transform.GetChild(0).GetComponent<PlayerScanner>().transform.eulerAngles = new Vector3(0, 0, 0);
         }
 
         public void TakeDamage(int damage)
         {
-            KnockBack(50f, 20f); //넉백
+            KnockBack(100, 20); //넉백
             monInfo.monsterInfo.hp -= damage;
-            monCombat = MonsterCombat.Damage;
-            BlinkMonster(1); //깜빡이는 효과
+            StartCoroutine(BlinkMonster(1, 2)); //깜빡이는 효과
 
             if (monInfo.monsterInfo.hp > 0)
             {
                 
             }
-            else if (monInfo.monsterInfo.hp <= 0)
+            else //몬스터의 체력이 0보다 작거나 같을 때
             {
                 monInfo.monsterInfo.hp = 0;
-                monState = MonsterState.Die;
-                //사망 이펙트 추가 //펑 터짐
-                Destroy(this.gameObject);
+                Die();
             }
         }
 
@@ -155,21 +196,58 @@ namespace Monster
         {
             //1.플레이어 산소 감소
             oxygen.DecreaseOxygen(monInfo.monsterInfo.attack);
-
-            //몬스터 사망시 효과
-            BlinkMonster(2);
-            //3. 효과 이후 몬스터 삭제
-            Destroy(this.gameObject);
+            Die();
         }
+
         //피격시 깜빡거림 효과
-        public void BlinkMonster(int blinkCount)
+        IEnumerator BlinkMonster(float blinkTime, int blinkCount)
         {
-            monCombat = MonsterCombat.None;
+            float time = blinkTime;
+            while (time > 0)
+            {
+                time -= Time.deltaTime;
+
+                monsterRenderer.color = Color.red;
+                yield return new WaitForSeconds(blinkTime / blinkCount / 2);
+
+                time -= blinkTime / blinkCount / 2;
+                monsterRenderer.color = new Color(1, 1, 1);
+                yield return new WaitForSeconds(blinkTime / blinkCount / 2);
+
+                time -= blinkTime / blinkCount / 2;
+            }
+
+            //사망시
+            if (monState == MonsterState.Die)
+            {
+                //사망 이펙트 추가 //터짐
+                BombEffect();
+                //3. 효과 이후 몬스터 삭제
+                Destroy(this.gameObject);
+            }
         }
         //넉백 효과
         public void KnockBack(float xPower, float yPower)
         {
-            rigid.velocity -= new Vector2(-transform.forward.x * xPower, rigid.velocity.y + yPower);
+            if (monInfo.monKind != MonsterKind.Dig)
+            {
+                rigid.velocity = new Vector2(-transform.forward.x * xPower, rigid.velocity.y + yPower);
+            }
+        }
+
+        private void Die()
+        {
+            //사망 상태로 변경
+            monState = MonsterState.Die;
+
+            //몬스터 사망시 효과
+            StartCoroutine(BlinkMonster(0.5f, 2));
+        }
+
+        private void BombEffect()
+        {
+            SpriteRenderer effect = Instantiate(dieEffect, transform.position, Quaternion.identity);
+            effect.transform.parent = transform.parent;
         }
     }
 }

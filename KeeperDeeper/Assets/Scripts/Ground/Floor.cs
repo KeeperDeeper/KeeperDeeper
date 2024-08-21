@@ -9,8 +9,7 @@ public class Floor : MonoBehaviour
     public GameObject blockSlot;
     public FloorBlock floorBlock;
 
-    [SerializeField]
-    private Block[] blockObj; //현재 층의 오브젝트 찾기
+    public Block[] blockObj; //현재 층의 오브젝트 찾기
 
     private void Start()
     {

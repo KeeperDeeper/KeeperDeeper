@@ -10,10 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 898e39716975f46489dff92ef4934cf1, type: 3}
-  m_Name: TestMonster
+  m_Name: Toruru
   m_EditorClassIdentifier: 
-  monName: "\uD14C\uC2A4\uD2B8"
+  monKind: 0
+  monName: "\uD1A0\uB8E8\uB8E8"
   hp: 50
-  speed: 100
-  range: 2.5
-  attack: 0
+  speed: 96
+  range: 10
+  atkRange: 0
+  atkTime: 0
+  atkSpeed: 150
+  attack: 25

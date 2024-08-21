@@ -15,7 +15,7 @@ namespace Monster
         {
             if (collision.gameObject.CompareTag("Player"))
             {
-                PlayerScan();
+                PlayerScan(collision);
             }
         }
         private void OnTriggerExit2D(Collider2D collision)
@@ -25,9 +25,10 @@ namespace Monster
                 GetOutOfScanner();
             }
         }
-        private void PlayerScan()
+        private void PlayerScan(Collider2D player)
         {
             this.monster.monState = MonsterState.Chase;
+            monster.target = player.transform;
         }
         private void GetOutOfScanner()
         {
@@ -36,7 +37,7 @@ namespace Monster
         }
         public void SetScannerSize()
         {
-            scanCollider.size = new Vector2(monster.monInfo.monsterInfo.scanRange, 100);
+            scanCollider.size = new Vector2(monster.monInfo.monsterInfo.scanRange, 150);
         }
     }
 }

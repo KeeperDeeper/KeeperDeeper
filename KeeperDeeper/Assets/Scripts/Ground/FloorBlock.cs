@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class FloorBlock : MonoBehaviour
 {
-    [HideInInspector]
+    //[HideInInspector]
     public FloorManager floorManager;
     public GroundManager groundManager;
 

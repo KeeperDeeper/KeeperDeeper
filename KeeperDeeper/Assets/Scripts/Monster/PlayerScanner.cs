@@ -37,7 +37,7 @@ namespace Monster
         }
         public void SetScannerSize()
         {
-            scanCollider.size = new Vector2(monster.monInfo.monsterInfo.scanRange, 150);
+            scanCollider.size = new Vector2(monster.monInfo.monsterInfo.scanRange, 1.5f);
         }
     }
 }

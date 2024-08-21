@@ -15,9 +15,9 @@ MonoBehaviour:
   monKind: 0
   monName: "\uD1A0\uB8E8\uB8E8"
   hp: 50
-  speed: 96
+  speed: 1
   range: 10
   atkRange: 0
   atkTime: 0
-  atkSpeed: 150
+  atkSpeed: 2
   attack: 25

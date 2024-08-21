@@ -15,7 +15,7 @@ MonoBehaviour:
   monKind: 1
   monName: "\uAFB8\uBB34\uB9AC"
   hp: 35
-  speed: 96
+  speed: 1
   range: 8
   atkRange: 2
   atkTime: 3

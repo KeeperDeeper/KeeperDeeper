@@ -37,8 +37,8 @@ public class MonsterInformation : ScriptableObject
         monsterInfo.monsterName = monName;
         monsterInfo.hp = hp;
         monsterInfo.speed = speed;
-        monsterInfo.scanRange = range * 192;
-        monsterInfo.attackRange = atkRange * 192;
+        monsterInfo.scanRange = range * 1.5f;
+        monsterInfo.attackRange = atkRange * 1.5f;
         monsterInfo.attackTime = atkTime;
         monsterInfo.attackSpeed = atkSpeed;
         monsterInfo.attack = attack;

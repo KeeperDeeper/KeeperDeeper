@@ -23,7 +23,7 @@ namespace DrillObject
         //드릴 정보 변경
         public void ChangeDrillInformation()
         {
-            this.gameObject.GetComponent<Image>().sprite = drillInformation.drillImg;
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = drillInformation.drillImg;
             drillName = drillInformation.drillName;
             drillLv = drillInformation.drillLevel;
             drillPo = drillInformation.drillPower;

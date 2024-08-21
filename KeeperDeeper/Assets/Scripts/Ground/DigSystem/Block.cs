@@ -20,7 +20,7 @@ public class Block : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         //¶¥À» ÆÄ´Â ÁßÀÏ ¶§
-        if (collision.gameObject.CompareTag("Drill") && blockInformation.blockStr != BlockInfo.BlockStrength.Lv0)
+        if (collision.gameObject.CompareTag("Drill"))
         {
             lifeTime -= Time.deltaTime * collision.GetComponent<Drill>().drillPo; //µå¸±power¿¡ µû¸¥ ±¼Âø½Ã°£
             if (lifeTime <= 0)
@@ -34,7 +34,7 @@ public class Block : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         //¶¥ÆÄ´Â °ÍÀ» ¸ØÃèÀ» ¶§
-        if (collision.gameObject.CompareTag("Drill") && blockInformation.blockStr != BlockInfo.BlockStrength.Lv0)
+        if (collision.gameObject.CompareTag("Drill"))
         {
             if (lifeTime > 0)
             {

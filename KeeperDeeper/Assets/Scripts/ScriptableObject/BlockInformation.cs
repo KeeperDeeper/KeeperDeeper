@@ -5,7 +5,7 @@ using UnityEngine;
 
 public struct BlockInfo
 {
-    public enum BlockStrength { Lv0, Lv1, Lv2,  Lv3 }; //블럭 분류
+    public enum BlockStrength { Lv1, Lv2,  Lv3, Lv4 }; //블럭 분류
     public float blockLife; //굴착해하는 시간
     public bool active;
 }
@@ -21,7 +21,6 @@ public class BlockInformation : ScriptableObject
     //블럭 정보 초기화
     public void Init()
     {
-        diggingTime = blockInfo.blockLife;
 
         for (int i = 0; i < Enum.GetValues(typeof(BlockInfo.BlockStrength)).Length; i++)
         {
@@ -31,5 +30,6 @@ public class BlockInformation : ScriptableObject
                 diggingTime = i + 1;
             }
         }
+        blockInfo.blockLife = diggingTime;
     }
 }

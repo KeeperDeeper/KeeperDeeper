@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BlockLv3
   m_EditorClassIdentifier: 
   blockImg: {fileID: 0}
-  blockStr: 3
+  blockStr: 2
   diggingTime: 0

@@ -21,7 +21,9 @@ public class Defines
     {
         Idle,
         MoveLeft,
-        MoveRight
+        MoveRight,
+        Falling,
+        FallingEnd
     }
 
     public enum UIType

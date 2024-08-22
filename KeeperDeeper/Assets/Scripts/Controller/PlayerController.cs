@@ -13,8 +13,10 @@ public class PlayerController : MonoBehaviour, IKeyInput
     private Rigidbody2D rigidbody;
 
     private bool isGround = false;
+    private int collidingGroundMount = 0;
 
     private Defines.MoveStatus moveStatus;
+    private Animator animator;
 
     void Start()
     {
@@ -31,8 +33,34 @@ public class PlayerController : MonoBehaviour, IKeyInput
         rigidbody = transform.GetComponent<Rigidbody2D>();
         moveStatus = Defines.MoveStatus.Idle;
 
+        animator = GetComponent<Animator>();
+
         Managers.InputManager.keyAction += KeyInput;
         Managers.DataManager.playerInventory.dropItemAction += DropItem;
+    }
+
+    public void SetFallingStateFalse()
+    {
+        moveStatus = Defines.MoveStatus.Idle;
+    }
+
+    private void CheckGround()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 2f);
+        Debug.DrawRay(transform.position, Vector2.down, Color.red, 2f);
+        if (hit.collider != null && hit.collider.CompareTag("GroundBlock"))
+        {
+            if (moveStatus == Defines.MoveStatus.Falling)
+            {
+                moveStatus = Defines.MoveStatus.FallingEnd;
+            }
+            isGround = true;
+        }
+        else
+        {
+            moveStatus = Defines.MoveStatus.Falling;
+            isGround = false;
+        }
     }
 
     private void Move()
@@ -41,17 +69,43 @@ public class PlayerController : MonoBehaviour, IKeyInput
         {
             case Defines.MoveStatus.Idle:
                 {
-
+                    animator.SetBool("IsRunning", false);
+                    animator.SetBool("IsFalling", false);
+                    animator.SetBool("IsGround", true);
                     break;
                 }
             case Defines.MoveStatus.MoveLeft:
                 {
+                    animator.SetBool("IsRunning", true);
+                    animator.SetBool("IsFalling", false);
+                    animator.SetBool("IsGround", true);
+                    if (transform.localScale.x < 0)
+                        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, 1);
                     transform.Translate(Vector2.left * moveSpeed * Time.deltaTime);
                     break;
                 }
             case Defines.MoveStatus.MoveRight:
                 {
+                    animator.SetBool("IsRunning", true);
+                    animator.SetBool("IsFalling", false);
+                    animator.SetBool("IsGround", true);
+                    if (transform.localScale.x > 0)
+                        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, 1);
                     transform.Translate(Vector2.right * moveSpeed * Time.deltaTime);
+                    break;
+                }
+            case Defines.MoveStatus.Falling:
+                {
+                    animator.SetBool("IsRunning", false);
+                    animator.SetBool("IsFalling", true);
+                    animator.SetBool("IsGround", false);
+                    break;
+                }
+            case Defines.MoveStatus.FallingEnd:
+                {
+                    animator.SetBool("IsRunning", false);
+                    animator.SetBool("IsFalling", true);
+                    animator.SetBool("IsGround", true);
                     break;
                 }
         }
@@ -116,17 +170,33 @@ public class PlayerController : MonoBehaviour, IKeyInput
             case Defines.KeyInputType.Press:
                 {
                     if (keyCode == KeyCode.A)
-                        moveStatus = Defines.MoveStatus.MoveLeft;
+                    {
+                        if (isGround && moveStatus != Defines.MoveStatus.FallingEnd)
+                            moveStatus = Defines.MoveStatus.MoveLeft;
+                    }
                     if (keyCode == KeyCode.D)
-                        moveStatus = Defines.MoveStatus.MoveRight;
+                    {
+                        if (isGround && moveStatus != Defines.MoveStatus.FallingEnd)
+                            moveStatus = Defines.MoveStatus.MoveRight;
+                    }
                     break;
                 }
             case Defines.KeyInputType.Up:
                 {
                     if (keyCode == KeyCode.A)
-                        moveStatus = Defines.MoveStatus.Idle;
+                    {
+                        if (isGround)
+                        {
+                            moveStatus = Defines.MoveStatus.Idle;
+                        }
+                    }
                     if (keyCode == KeyCode.D)
-                        moveStatus = Defines.MoveStatus.Idle;
+                    {
+                        if (isGround)
+                        {
+                            moveStatus = Defines.MoveStatus.Idle;
+                        }
+                    }
                     break;
                 }
         }
@@ -134,11 +204,35 @@ public class PlayerController : MonoBehaviour, IKeyInput
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        switch (collision.gameObject.tag)
+        if (collision.gameObject.CompareTag("GroundBlock"))
         {
-            case "Ground":
-                isGround = true;
-                break;
+            collidingGroundMount += 1;
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("GroundBlock"))
+        {
+            if (moveStatus == Defines.MoveStatus.Falling)
+            {
+                moveStatus = Defines.MoveStatus.FallingEnd;
+                return;
+            }
+            isGround = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("GroundBlock"))
+        {
+            collidingGroundMount -= 1;
+            if (collidingGroundMount == 0)
+            {
+                moveStatus = Defines.MoveStatus.Falling;
+                isGround = false;
+            }
         }
     }
 }

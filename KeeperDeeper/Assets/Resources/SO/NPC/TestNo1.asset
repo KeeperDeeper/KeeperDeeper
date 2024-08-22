@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01ad5cfefea4f9941aaccd3d750a87b6, type: 3}
   m_Name: TestNo1
   m_EditorClassIdentifier: 
-  npcId: 1
+  npcId: 0
   likeability: 0
   npcName: Test1
   dialogueIdList: 00000000010000000200000003000000

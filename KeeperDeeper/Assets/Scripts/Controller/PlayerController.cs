@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour, IKeyInput
 
     private bool isGround = false;
 
-    private Defines.MoveDirection facingDirection;
+    private Defines.MoveStatus facingDirection;
 
     void Start()
     {
@@ -24,25 +24,25 @@ public class PlayerController : MonoBehaviour, IKeyInput
     void Init()
     {
         rigidbody = transform.GetComponent<Rigidbody2D>();
-        facingDirection = Defines.MoveDirection.Right;
+        facingDirection = Defines.MoveStatus.MoveRight;
 
         Managers.InputManager.keyAction += KeyInput;
         Managers.DataManager.playerInventory.dropItemAction += DropItem;
     }
 
-    private void Move(Defines.MoveDirection moveDir)
+    private void Move(Defines.MoveStatus moveDir)
     {
         switch (moveDir)
         {
-            case Defines.MoveDirection.Left:
+            case Defines.MoveStatus.MoveLeft:
                 {
-                    facingDirection = Defines.MoveDirection.Left;
+                    facingDirection = Defines.MoveStatus.MoveLeft;
                     transform.Translate(Vector2.left * moveSpeed * Time.deltaTime);
                     break;
                 }
-            case Defines.MoveDirection.Right:
+            case Defines.MoveStatus.MoveRight:
                 {
-                    facingDirection = Defines.MoveDirection.Right;
+                    facingDirection = Defines.MoveStatus.MoveRight;
                     transform.Translate(Vector2.right * moveSpeed * Time.deltaTime);
                     break;
                 }
@@ -105,9 +105,9 @@ public class PlayerController : MonoBehaviour, IKeyInput
             case Defines.KeyInputType.Press:
                 {
                     if (keyCode == KeyCode.A)
-                        Move(Defines.MoveDirection.Left);
+                        Move(Defines.MoveStatus.MoveLeft);
                     if (keyCode == KeyCode.D)
-                        Move(Defines.MoveDirection.Right);
+                        Move(Defines.MoveStatus.MoveRight);
                     break;
                 }
             case Defines.KeyInputType.Up:

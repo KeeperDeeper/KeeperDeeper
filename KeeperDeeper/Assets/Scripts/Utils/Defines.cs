@@ -18,10 +18,11 @@ public class Defines
         Up
     }
 
-    public enum MoveDirection
+    public enum MoveStatus
     {
-        Left,
-        Right
+        Idle,
+        MoveLeft,
+        MoveRight
     }
 
     public enum UIType

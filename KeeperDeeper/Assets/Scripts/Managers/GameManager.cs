@@ -8,11 +8,11 @@ public class GameManager : IManagers
     public bool endStage;
 
     public Action interactAction;
-    public bool isBlockInput;
+    public bool isBlockingUserInput;
 
     public void Init()
     {
-        isBlockInput = false;
+        isBlockingUserInput = false;
         oxygen = UnityEngine.Object.FindObjectOfType<Oxygen>();
         endStage = false;
         oxygen.InitOxygenTank(); //산소 초기화

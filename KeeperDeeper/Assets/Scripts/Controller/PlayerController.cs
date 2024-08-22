@@ -131,32 +131,36 @@ public class PlayerController : MonoBehaviour, IKeyInput
         {
             case Defines.KeyInputType.Down:
                 {
+                    // 점프, 사용 안하니까 아예 다른 기능으로 변경 혹은 주석처리 바람
                     if (keyCode == KeyCode.Space)
                     {
-                        if (Managers.GameManager.isBlockInput)
+                        if (Managers.GameManager.isBlockingUserInput)
                             return;
 
                         if (isGround)
                             Jump();
                     }
+                    // 인벤토리
                     if (keyCode == KeyCode.Tab)
                     {
-                        if (Managers.GameManager.isBlockInput)
+                        if (Managers.GameManager.isBlockingUserInput)
                             return;
 
                         if (Managers.UIManager.CheckUIMountMargin(Defines.UIType.Inventory, Values.UI_MOUNT_MARGIN_INVENTORY))
                             Managers.UIManager.CreateUI(Defines.UIType.Inventory);
                     }
+                    // Esc기능. 현재는 UI를 끄는 기능만 구현되어있음.
                     if (keyCode == KeyCode.Escape)
                     {
-                        if (Managers.GameManager.isBlockInput)
+                        if (Managers.GameManager.isBlockingUserInput)
                             return;
 
                         Managers.UIManager.CloseUI();
                     }
+                    // 상호작용. 대화중인 경우 대화를 진행하는 기능을, 그렇지 않다면 기타 상호작용을 함.
                     if (keyCode == KeyCode.E)
                     {
-                        if (Managers.GameManager.isBlockInput)
+                        if (Managers.GameManager.isBlockingUserInput)
                         {
                             Managers.DialogueManager.inputWhileDialogue.Invoke();
                         }

@@ -18,7 +18,7 @@ public class UI_Dialogue : UI_Base, IPointerClickHandler
 
     private void Start()
     {
-        Managers.GameManager.isBlockInput = true;
+        Managers.GameManager.isBlockingUserInput = true;
         nameTMP = transform.Find(nameDir).GetComponent<TextMeshProUGUI>();
         dialogueTMP = transform.Find(dialogueDir).GetComponent<TextMeshProUGUI>();
         currentIdx = 0;
@@ -32,7 +32,7 @@ public class UI_Dialogue : UI_Base, IPointerClickHandler
         dialogueTMP.text = "";
         if (isEnd)
         {
-            Managers.GameManager.isBlockInput = false;
+            Managers.GameManager.isBlockingUserInput = false;
             Managers.DialogueManager.dialogueChoiceSelectAction -= ChoiceSelect;
             Managers.DialogueManager.inputWhileDialogue -= PlayerInputWhileDialogue;
             Destroy(gameObject);

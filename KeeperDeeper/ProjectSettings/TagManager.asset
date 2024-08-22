@@ -10,6 +10,9 @@ TagManager:
   - GroundBlock
   - FloorBlock
   - NPC
+  - Wall
+  - Monster
+  - CloudBlock
   layers:
   - Default
   - TransparentFX

@@ -18,6 +18,7 @@ public class Managers : MonoBehaviour
     private static DialogueManager _dialogueManager = new DialogueManager();
     private static GameManager _gameManager = new GameManager();
     private static StageManager _stageManager = new StageManager();
+    private static SoundManager _soundManager = new SoundManager();
 
     public static InputManager InputManager { get { return _inputManager; } }
     public static UIManager UIManager { get { return _uiManager; } }
@@ -25,6 +26,7 @@ public class Managers : MonoBehaviour
     public static DialogueManager DialogueManager { get { return _dialogueManager; } }
     public static GameManager GameManager { get { return _gameManager; } }
     public static StageManager StageManager { get { return _stageManager; } }
+    public static SoundManager SoundManager { get { return _soundManager; } }
     #endregion
 
 

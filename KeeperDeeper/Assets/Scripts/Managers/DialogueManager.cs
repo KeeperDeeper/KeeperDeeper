@@ -6,6 +6,7 @@ using UnityEngine;
 public class DialogueManager : IManagers
 {
     public Action<int> dialogueChoiceSelectAction;
+    public Action inputWhileDialogue;
 
     public DialogueSO currentDialogue;
     public GameObject choiceButtonObj;

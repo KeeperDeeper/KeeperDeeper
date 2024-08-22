@@ -65,30 +65,40 @@ public class PlayerController : MonoBehaviour, IKeyInput
 
     public void KeyInput(KeyCode keyCode, Defines.KeyInputType inputType)
     {
-        if (Managers.IngameManager.isBlockInput)
-            return;
-
         switch (inputType)
         {
             case Defines.KeyInputType.Down:
                 {
                     if (keyCode == KeyCode.Space)
                     {
+                        if (Managers.IngameManager.isBlockInput)
+                            return;
                         if (isGround)
                             Jump();
                     }
                     if (keyCode == KeyCode.Tab)
                     {
+                        if (Managers.IngameManager.isBlockInput)
+                            return;
                         if (Managers.UIManager.CheckUIMountMargin(Defines.UIType.Inventory, Values.UI_MOUNT_MARGIN_INVENTORY))
                             Managers.UIManager.CreateUI(Defines.UIType.Inventory);
                     }
                     if (keyCode == KeyCode.Escape)
                     {
+                        if (Managers.IngameManager.isBlockInput)
+                            return;
                         Managers.UIManager.CloseUI();
                     }
                     if (keyCode == KeyCode.E)
                     {
-                        Managers.IngameManager.TryInteract();
+                        if (Managers.IngameManager.isBlockInput)
+                        {
+                            Managers.DialogueManager.inputWhileDialogue.Invoke();
+                        }
+                        else
+                        {
+                            Managers.IngameManager.TryInteract();
+                        }
                     }
                     break;
                 }

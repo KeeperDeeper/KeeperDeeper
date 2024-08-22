@@ -31,6 +31,12 @@ public class Defines
         DialogueChoice
     }
 
+    public enum ChoiceResults
+    {
+        Nothing,
+        IncreaseLikeabillity
+    }
+
     public class PlayerInventory
     {
         // Param = Item ID, Item Mount
@@ -87,5 +93,6 @@ public class Defines
     {
         public int nextIdx;
         public string content;
+        public ChoiceResults result;
     }
 }

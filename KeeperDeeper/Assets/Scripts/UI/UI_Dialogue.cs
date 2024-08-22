@@ -18,10 +18,12 @@ public class UI_Dialogue : UI_Base, IPointerClickHandler
 
     private void Start()
     {
+        Managers.IngameManager.isBlockInput = true;
         nameTMP = transform.Find(nameDir).GetComponent<TextMeshProUGUI>();
         dialogueTMP = transform.Find(dialogueDir).GetComponent<TextMeshProUGUI>();
         currentIdx = 0;
         Managers.DialogueManager.dialogueChoiceSelectAction += ChoiceSelect;
+        Managers.DialogueManager.inputWhileDialogue += PlayerInputWhileDialogue;
         UpdateDialogue();
     }
 
@@ -30,7 +32,9 @@ public class UI_Dialogue : UI_Base, IPointerClickHandler
         dialogueTMP.text = "";
         if (isEnd)
         {
+            Managers.IngameManager.isBlockInput = false;
             Managers.DialogueManager.dialogueChoiceSelectAction -= ChoiceSelect;
+            Managers.DialogueManager.inputWhileDialogue -= PlayerInputWhileDialogue;
             Destroy(gameObject);
         }
         nameTMP.text = Managers.DialogueManager.currentDialogue.dialogueDatas[currentIdx].name;
@@ -68,24 +72,29 @@ public class UI_Dialogue : UI_Base, IPointerClickHandler
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            if (isAnimaionPlaying)
+            Managers.DialogueManager.inputWhileDialogue.Invoke();
+        }
+    }
+
+    public void PlayerInputWhileDialogue()
+    {
+        if (isAnimaionPlaying)
+        {
+            StopCoroutine(currentTextAnimation);
+            dialogueTMP.text = dialogueText;
+            isAnimaionPlaying = false;
+            if (Managers.DialogueManager.currentDialogue.dialogueDatas[currentIdx].choices.Count > 0)
             {
-                StopCoroutine(currentTextAnimation);
-                dialogueTMP.text = dialogueText;
-                isAnimaionPlaying = false;
-                if (Managers.DialogueManager.currentDialogue.dialogueDatas[currentIdx].choices.Count > 0)
-                {
-                    Managers.DialogueManager.TriggerDialogueChoice(Managers.DialogueManager.currentDialogue.dialogueDatas[currentIdx].choices);
-                }
-                else
-                {
-                    currentIdx = Managers.DialogueManager.currentDialogue.dialogueDatas[currentIdx].nextIdx;
-                }
+                Managers.DialogueManager.TriggerDialogueChoice(Managers.DialogueManager.currentDialogue.dialogueDatas[currentIdx].choices);
             }
             else
             {
-                UpdateDialogue();
+                currentIdx = Managers.DialogueManager.currentDialogue.dialogueDatas[currentIdx].nextIdx;
             }
+        }
+        else
+        {
+            UpdateDialogue();
         }
     }
 }

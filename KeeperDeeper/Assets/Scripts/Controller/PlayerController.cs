@@ -1,45 +1,56 @@
 using UnityEngine;
 
+/* 플레이어 컨트롤러
+ * 플레이어 오브젝트에 직접 집어넣어서 
+ */
 public class PlayerController : MonoBehaviour, IKeyInput
 {
     [SerializeField]
     private float moveSpeed = 5.0f;
     [SerializeField]
-    private float jumpPower = 20.0f;
+    private float jumpPower = 5.0f;
 
     private Rigidbody2D rigidbody;
 
     private bool isGround = false;
 
-    private Defines.MoveDirection facingDirection;
+    private Defines.MoveStatus moveStatus;
 
     void Start()
     {
         Init();
     }
 
+    void Update()
+    {
+        Move();
+    }
+
     void Init()
     {
         rigidbody = transform.GetComponent<Rigidbody2D>();
-        facingDirection = Defines.MoveDirection.Right;
+        moveStatus = Defines.MoveStatus.Idle;
 
         Managers.InputManager.keyAction += KeyInput;
         Managers.DataManager.playerInventory.dropItemAction += DropItem;
     }
 
-    private void Move(Defines.MoveDirection moveDir)
+    private void Move()
     {
-        switch (moveDir)
+        switch (moveStatus)
         {
-            case Defines.MoveDirection.Left:
+            case Defines.MoveStatus.Idle:
                 {
-                    facingDirection = Defines.MoveDirection.Left;
+
+                    break;
+                }
+            case Defines.MoveStatus.MoveLeft:
+                {
                     transform.Translate(Vector2.left * moveSpeed * Time.deltaTime);
                     break;
                 }
-            case Defines.MoveDirection.Right:
+            case Defines.MoveStatus.MoveRight:
                 {
-                    facingDirection = Defines.MoveDirection.Right;
                     transform.Translate(Vector2.right * moveSpeed * Time.deltaTime);
                     break;
                 }
@@ -68,31 +79,54 @@ public class PlayerController : MonoBehaviour, IKeyInput
                 {
                     if (keyCode == KeyCode.Space)
                     {
+                        if (Managers.IngameManager.isBlockInput)
+                            return;
+
                         if (isGround)
                             Jump();
                     }
                     if (keyCode == KeyCode.Tab)
                     {
+                        if (Managers.IngameManager.isBlockInput)
+                            return;
+
                         if (Managers.UIManager.CheckUIMountMargin(Defines.UIType.Inventory, Values.UI_MOUNT_MARGIN_INVENTORY))
                             Managers.UIManager.CreateUI(Defines.UIType.Inventory);
                     }
                     if (keyCode == KeyCode.Escape)
                     {
+                        if (Managers.IngameManager.isBlockInput)
+                            return;
+
                         Managers.UIManager.CloseUI();
+                    }
+                    if (keyCode == KeyCode.E)
+                    {
+                        if (Managers.IngameManager.isBlockInput)
+                        {
+                            Managers.DialogueManager.inputWhileDialogue.Invoke();
+                        }
+                        else
+                        {
+                            Managers.IngameManager.TryInteract();
+                        }
                     }
                     break;
                 }
             case Defines.KeyInputType.Press:
                 {
                     if (keyCode == KeyCode.A)
-                        Move(Defines.MoveDirection.Left);
+                        moveStatus = Defines.MoveStatus.MoveLeft;
                     if (keyCode == KeyCode.D)
-                        Move(Defines.MoveDirection.Right);
+                        moveStatus = Defines.MoveStatus.MoveRight;
                     break;
                 }
             case Defines.KeyInputType.Up:
                 {
-
+                    if (keyCode == KeyCode.A)
+                        moveStatus = Defines.MoveStatus.Idle;
+                    if (keyCode == KeyCode.D)
+                        moveStatus = Defines.MoveStatus.Idle;
                     break;
                 }
         }

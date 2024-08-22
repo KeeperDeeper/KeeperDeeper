@@ -25,6 +25,8 @@ public class InputManager : IManagers
                 keyAction.Invoke(KeyCode.Tab, Defines.KeyInputType.Down);
             if (Input.GetKeyDown(KeyCode.Escape))
                 keyAction.Invoke(KeyCode.Escape, Defines.KeyInputType.Down);
+            if (Input.GetKeyDown(KeyCode.E))
+                keyAction.Invoke(KeyCode.E, Defines.KeyInputType.Down);
             #endregion
 
             #region KeyPress
@@ -35,7 +37,10 @@ public class InputManager : IManagers
             #endregion
 
             #region KeyUp
-
+            if (Input.GetKeyUp(KeyCode.A))
+                keyAction.Invoke(KeyCode.A, Defines.KeyInputType.Up);
+            if (Input.GetKeyUp(KeyCode.D))
+                keyAction.Invoke(KeyCode.D, Defines.KeyInputType.Up);
             #endregion
         }
 

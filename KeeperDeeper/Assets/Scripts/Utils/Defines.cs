@@ -18,10 +18,11 @@ public class Defines
         Up
     }
 
-    public enum MoveDirection
+    public enum MoveStatus
     {
-        Left,
-        Right
+        Idle,
+        MoveLeft,
+        MoveRight
     }
 
     public enum UIType
@@ -29,6 +30,12 @@ public class Defines
         Inventory,
         Dialogue,
         DialogueChoice
+    }
+
+    public enum ChoiceResults
+    {
+        Nothing,
+        IncreaseLikeabillity
     }
 
     public class PlayerInventory
@@ -87,5 +94,6 @@ public class Defines
     {
         public int nextIdx;
         public string content;
+        public ChoiceResults result;
     }
 }

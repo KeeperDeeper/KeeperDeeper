@@ -10,35 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6f6a37a19b580e45a0d53a3297e9610, type: 3}
-  m_Name: Test
+  m_Name: Test2
   m_EditorClassIdentifier: 
-  dialogueId: 1
+  dialogueId: 2
   dialogueDatas:
   - nextIdx: 1
     textAnimationSpeed: 0.02
     name: test
-    dialogue: Hello!!
+    dialogue: Goodnight
     isEnd: 0
-    choices: []
-  - nextIdx: 2
-    textAnimationSpeed: 0.02
-    name: test
-    dialogue: How are you today?
-    isEnd: 0
-    choices:
-    - nextIdx: 2
-      content: Not bad.
-    - nextIdx: 3
-      content: I'm happy now!
-  - nextIdx: 0
-    textAnimationSpeed: 0.1
-    name: test
-    dialogue: I hope you happy...
-    isEnd: 1
     choices: []
   - nextIdx: 0
     textAnimationSpeed: 0.02
     name: test
-    dialogue: I'm happy too!!
+    dialogue: ByeBye
     isEnd: 1
     choices: []

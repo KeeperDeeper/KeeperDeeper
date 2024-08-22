@@ -9,6 +9,7 @@ TagManager:
   - CheckPoint
   - GroundBlock
   - FloorBlock
+  - NPC
   - Wall
   - Monster
   - CloudBlock

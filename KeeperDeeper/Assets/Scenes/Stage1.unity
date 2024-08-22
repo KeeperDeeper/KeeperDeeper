@@ -1507,7 +1507,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &58541435
 Transform:
   m_ObjectHideFlags: 0
@@ -8423,6 +8423,7 @@ GameObject:
   - component: {fileID: 363456046}
   - component: {fileID: 363456045}
   - component: {fileID: 363456048}
+  - component: {fileID: 363456049}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -8492,6 +8493,19 @@ MonoBehaviour:
   stageSave: 0
   restart: 0
   curStageFloor: 0
+--- !u!114 &363456049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 363456044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8596a4c5138a9b47b3094b1b28bf32e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  endStage: 0
 --- !u!1 &370068436
 GameObject:
   m_ObjectHideFlags: 0
@@ -17650,18 +17664,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 660693308}
     m_Modifications:
-    - target: {fileID: -7696648078392789524, guid: e7898f0ef59a03f43833350461b657d0, type: 3}
-      propertyPath: oxygen
-      value: 
-      objectReference: {fileID: 835089144}
-    - target: {fileID: -7696648078392789524, guid: e7898f0ef59a03f43833350461b657d0, type: 3}
-      propertyPath: curFloor
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: -7696648078392789524, guid: e7898f0ef59a03f43833350461b657d0, type: 3}
-      propertyPath: stageManager
-      value: 
-      objectReference: {fileID: 363456048}
     - target: {fileID: 4447228255963785217, guid: e7898f0ef59a03f43833350461b657d0, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -20947,17 +20949,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6972350467492460658, guid: 740e58e0a32d7294890238bfc5cf9cb9, type: 3}
   m_PrefabInstance: {fileID: 835089141}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &835089144 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6972350467492460656, guid: 740e58e0a32d7294890238bfc5cf9cb9, type: 3}
-  m_PrefabInstance: {fileID: 835089141}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdbf6550c7de36e41acdc14a202c2650, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &837340256
 GameObject:
   m_ObjectHideFlags: 0
@@ -42408,14 +42399,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2759070563345290369, guid: da7828403b267c8478020d88a0308d8e, type: 3}
-      propertyPath: oxygen
-      value: 
-      objectReference: {fileID: 835089144}
-    - target: {fileID: 2759070563345290369, guid: da7828403b267c8478020d88a0308d8e, type: 3}
-      propertyPath: stageManager
-      value: 
-      objectReference: {fileID: 363456048}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da7828403b267c8478020d88a0308d8e, type: 3}
 --- !u!4 &1716129485 stripped

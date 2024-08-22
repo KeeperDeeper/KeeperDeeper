@@ -9,15 +9,15 @@ public class CheckPoint : MonoBehaviour
     public enum PointKind { Check, Finish}
     public PointKind pointKind;
 
-    [SerializeField]
     private Oxygen oxygen;
-    [SerializeField]
+    private GameManager gameManager;
     private StageManager stageManager;
+
     [SerializeField]
     private int curFloor;
     private void Start()
     {
-        this.gameObject.SetActive(true);
+        gameObject.SetActive(true);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -27,20 +27,21 @@ public class CheckPoint : MonoBehaviour
             if (pointKind == PointKind.Check)
             {
                 //산소회복
-                this.oxygen = FindObjectOfType<Oxygen>();
+                oxygen = FindObjectOfType<Oxygen>();
                 oxygen.check = true;
                 oxygen.RecoveryOxygen();
 
                 //데이터 저장
-                this.stageManager = FindObjectOfType<StageManager>();
+                stageManager = FindObjectOfType<StageManager>();
                 stageManager.SaveStageData(curFloor);
 
                 //비활성화
-                this.gameObject.SetActive(false);
+                gameObject.SetActive(false);
             }
             else if (pointKind == PointKind.Finish)
             {
-
+                gameManager = FindObjectOfType<GameManager>();
+                gameManager.EndStage();
             }
         }
     }

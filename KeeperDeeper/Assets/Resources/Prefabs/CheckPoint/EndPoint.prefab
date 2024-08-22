@@ -126,5 +126,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointKind: 1
   oxygen: {fileID: 0}
+  gameManager: {fileID: 0}
   stageManager: {fileID: 0}
   curFloor: 0

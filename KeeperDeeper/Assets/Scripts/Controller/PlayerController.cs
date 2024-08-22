@@ -14,35 +14,43 @@ public class PlayerController : MonoBehaviour, IKeyInput
 
     private bool isGround = false;
 
-    private Defines.MoveStatus facingDirection;
+    private Defines.MoveStatus moveStatus;
 
     void Start()
     {
         Init();
     }
 
+    void Update()
+    {
+        Move();
+    }
+
     void Init()
     {
         rigidbody = transform.GetComponent<Rigidbody2D>();
-        facingDirection = Defines.MoveStatus.MoveRight;
+        moveStatus = Defines.MoveStatus.Idle;
 
         Managers.InputManager.keyAction += KeyInput;
         Managers.DataManager.playerInventory.dropItemAction += DropItem;
     }
 
-    private void Move(Defines.MoveStatus moveDir)
+    private void Move()
     {
-        switch (moveDir)
+        switch (moveStatus)
         {
+            case Defines.MoveStatus.Idle:
+                {
+
+                    break;
+                }
             case Defines.MoveStatus.MoveLeft:
                 {
-                    facingDirection = Defines.MoveStatus.MoveLeft;
                     transform.Translate(Vector2.left * moveSpeed * Time.deltaTime);
                     break;
                 }
             case Defines.MoveStatus.MoveRight:
                 {
-                    facingDirection = Defines.MoveStatus.MoveRight;
                     transform.Translate(Vector2.right * moveSpeed * Time.deltaTime);
                     break;
                 }
@@ -73,6 +81,7 @@ public class PlayerController : MonoBehaviour, IKeyInput
                     {
                         if (Managers.IngameManager.isBlockInput)
                             return;
+
                         if (isGround)
                             Jump();
                     }
@@ -80,6 +89,7 @@ public class PlayerController : MonoBehaviour, IKeyInput
                     {
                         if (Managers.IngameManager.isBlockInput)
                             return;
+
                         if (Managers.UIManager.CheckUIMountMargin(Defines.UIType.Inventory, Values.UI_MOUNT_MARGIN_INVENTORY))
                             Managers.UIManager.CreateUI(Defines.UIType.Inventory);
                     }
@@ -87,6 +97,7 @@ public class PlayerController : MonoBehaviour, IKeyInput
                     {
                         if (Managers.IngameManager.isBlockInput)
                             return;
+
                         Managers.UIManager.CloseUI();
                     }
                     if (keyCode == KeyCode.E)
@@ -105,14 +116,17 @@ public class PlayerController : MonoBehaviour, IKeyInput
             case Defines.KeyInputType.Press:
                 {
                     if (keyCode == KeyCode.A)
-                        Move(Defines.MoveStatus.MoveLeft);
+                        moveStatus = Defines.MoveStatus.MoveLeft;
                     if (keyCode == KeyCode.D)
-                        Move(Defines.MoveStatus.MoveRight);
+                        moveStatus = Defines.MoveStatus.MoveRight;
                     break;
                 }
             case Defines.KeyInputType.Up:
                 {
-
+                    if (keyCode == KeyCode.A)
+                        moveStatus = Defines.MoveStatus.Idle;
+                    if (keyCode == KeyCode.D)
+                        moveStatus = Defines.MoveStatus.Idle;
                     break;
                 }
         }

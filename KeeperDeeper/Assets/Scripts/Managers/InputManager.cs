@@ -37,7 +37,10 @@ public class InputManager : IManagers
             #endregion
 
             #region KeyUp
-
+            if (Input.GetKeyUp(KeyCode.A))
+                keyAction.Invoke(KeyCode.A, Defines.KeyInputType.Up);
+            if (Input.GetKeyUp(KeyCode.D))
+                keyAction.Invoke(KeyCode.D, Defines.KeyInputType.Up);
             #endregion
         }
 

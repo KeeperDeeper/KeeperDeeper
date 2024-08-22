@@ -73,9 +73,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -97,3 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1c7a1d0042bd474a944fdd48998bfce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monsterObj:
+  - {fileID: 3463203652952118060, guid: 69351f476a6b2814c9e61344164b2561, type: 3}
+  - {fileID: 5845845649612452231, guid: 3f904029eec13af429a76eebc995e591, type: 3}
+  - {fileID: 3057433197987446780, guid: 8471e3f8380f0a74683870ef8e44c10f, type: 3}
+  monsterNum: 0

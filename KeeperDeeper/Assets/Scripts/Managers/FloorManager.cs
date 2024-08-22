@@ -44,7 +44,6 @@ namespace FloorManagement
             floorNumber.text = $"지하 {playerFloor.ToString()}층";
         }
 
-        [ContextMenu("ResetStage")]
         //스테이지 초기화시
         public void ResetStageBlock()
         {

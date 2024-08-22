@@ -8287,10 +8287,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 363456047}
-  - component: {fileID: 363456046}
-  - component: {fileID: 363456045}
-  - component: {fileID: 363456048}
-  - component: {fileID: 363456049}
+  - component: {fileID: 363456050}
   m_Layer: 0
   m_Name: '@Manager'
   m_TagString: Untagged
@@ -8298,36 +8295,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &363456045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 363456044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c88d1bea2821baa43afd5da30332b462, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  floors: []
-  floorNumber: {fileID: 1343926116}
-  playerFloor: 0
---- !u!114 &363456046
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 363456044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eed643a9a0dbbc14e884fd4181fc84df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pressure: 1
-  undergroundFloor: 0
-  pressureText: {fileID: 1236861376}
 --- !u!4 &363456047
 Transform:
   m_ObjectHideFlags: 0
@@ -8343,7 +8310,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &363456048
+--- !u!114 &363456050
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8352,27 +8319,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 363456044}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 251b711a90d8a8f46a9db44b341af355, type: 3}
+  m_Script: {fileID: 11500000, guid: 6309817364433bf44a782732fec49904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floorManager: {fileID: 363456045}
-  groundManager: {fileID: 363456046}
-  stageSave: 0
-  restart: 0
-  curStageFloor: 0
---- !u!114 &363456049
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 363456044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8596a4c5138a9b47b3094b1b28bf32e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  endStage: 0
 --- !u!1 &370068436
 GameObject:
   m_ObjectHideFlags: 0
@@ -20777,7 +20726,7 @@ PrefabInstance:
     - target: {fileID: 6972350467492460656, guid: 740e58e0a32d7294890238bfc5cf9cb9, type: 3}
       propertyPath: groundManager
       value: 
-      objectReference: {fileID: 363456046}
+      objectReference: {fileID: 0}
     - target: {fileID: 6972350467492460658, guid: 740e58e0a32d7294890238bfc5cf9cb9, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

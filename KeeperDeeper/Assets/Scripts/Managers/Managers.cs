@@ -1,3 +1,4 @@
+using StageManagement;
 using UnityEngine;
 
 public class Managers : MonoBehaviour
@@ -15,13 +16,15 @@ public class Managers : MonoBehaviour
     private static UIManager _uiManager = new UIManager();
     private static DataManager _dataManager = new DataManager();
     private static DialogueManager _dialogueManager = new DialogueManager();
-    private static IngameManager _ingameManager = new IngameManager();
+    private static GameManager _gameManager = new GameManager();
+    private static StageManager _stageManager = new StageManager();
 
     public static InputManager InputManager { get { return _inputManager; } }
     public static UIManager UIManager { get { return _uiManager; } }
     public static DataManager DataManager { get { return _dataManager; } }
     public static DialogueManager DialogueManager { get { return _dialogueManager; } }
-    public static IngameManager IngameManager { get { return _ingameManager; } }
+    public static GameManager GameManager { get { return _gameManager; } }
+    public static StageManager StageManager { get { return _stageManager; } }
     #endregion
 
 
@@ -66,6 +69,7 @@ public class Managers : MonoBehaviour
         UIManager.Init();
         DataManager.Init();
         DialogueManager.Init();
-        IngameManager.Init();
+        GameManager.Init();
+        StageManager.Init();
     }
 }

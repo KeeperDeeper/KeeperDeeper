@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour, IKeyInput
                 {
                     if (keyCode == KeyCode.Space)
                     {
-                        if (Managers.IngameManager.isBlockInput)
+                        if (Managers.GameManager.isBlockInput)
                             return;
 
                         if (isGround)
@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour, IKeyInput
                     }
                     if (keyCode == KeyCode.Tab)
                     {
-                        if (Managers.IngameManager.isBlockInput)
+                        if (Managers.GameManager.isBlockInput)
                             return;
 
                         if (Managers.UIManager.CheckUIMountMargin(Defines.UIType.Inventory, Values.UI_MOUNT_MARGIN_INVENTORY))
@@ -95,20 +95,20 @@ public class PlayerController : MonoBehaviour, IKeyInput
                     }
                     if (keyCode == KeyCode.Escape)
                     {
-                        if (Managers.IngameManager.isBlockInput)
+                        if (Managers.GameManager.isBlockInput)
                             return;
 
                         Managers.UIManager.CloseUI();
                     }
                     if (keyCode == KeyCode.E)
                     {
-                        if (Managers.IngameManager.isBlockInput)
+                        if (Managers.GameManager.isBlockInput)
                         {
                             Managers.DialogueManager.inputWhileDialogue.Invoke();
                         }
                         else
                         {
-                            Managers.IngameManager.TryInteract();
+                            Managers.GameManager.TryInteract();
                         }
                     }
                     break;

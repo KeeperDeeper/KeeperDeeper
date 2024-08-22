@@ -94,7 +94,7 @@ public class NPCController : MonoBehaviour
         {
             case "Player":
                 {
-                    Managers.IngameManager.interactAction += PlayerInteract;
+                    Managers.GameManager.interactAction += PlayerInteract;
                     Debug.Log("enter");
                     break;
                 }
@@ -107,7 +107,7 @@ public class NPCController : MonoBehaviour
         {
             case "Player":
                 {
-                    Managers.IngameManager.interactAction -= PlayerInteract;
+                    Managers.GameManager.interactAction -= PlayerInteract;
                     Debug.Log("exit");
                     break;
                 }

@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using FloorManagement;
-using GroundManagment;
-using System;
+
 public class Floor : MonoBehaviour
 {
     public GameObject blockSlot;

@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using GroundManagment;
 
 namespace OxygenSystem
 {
@@ -9,8 +6,6 @@ namespace OxygenSystem
     {
         [SerializeField]
         private OxygenInformation oxyInfo;
-        [SerializeField]
-        private GroundManager groundManager;
         [SerializeField]
         private OxygenValue oxyValue;
 
@@ -49,7 +44,7 @@ namespace OxygenSystem
             //1초가 지나면
             if (countTime <= 0)
             {
-                oxyCapacity -= consume * groundManager.pressure; //산소 차감
+                oxyCapacity -= consume * Managers.StageManager.pressure; //산소 차감
                 if (oxyCapacity > 0)
                 {
                     oxyValue.ChangeOxygenValue(); //Image 산소수치 변경
@@ -58,7 +53,7 @@ namespace OxygenSystem
                 {
                     oxyCapacity = 0; //-값이 안나오도록 0으로 초기화
                     oxyValue.ChangeOxygenValue(); //Image 산소수치 변경
-                    groundManager.ResetPressure(); //압력 초기화
+                    Managers.StageManager.ResetPressure(); //압력 초기화
                     //마을로 플레이어 복귀
                     //굴착플레이 종료 Update문에서 돌아가지 않도록 false처리 해주기
                 }

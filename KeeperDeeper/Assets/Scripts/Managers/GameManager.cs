@@ -1,23 +1,29 @@
 using OxygenSystem;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System;
 
-public class GameManager : MonoBehaviour
+public class GameManager : IManagers
 {
     private Oxygen oxygen;
 
     public bool endStage;
 
-    private void Awake()
-    {
-        oxygen = FindObjectOfType<Oxygen>();
-    }
+    public Action interactAction;
+    public bool isBlockInput;
 
-    private void Start()
+    public void Init()
     {
+        isBlockInput = false;
+        oxygen = UnityEngine.Object.FindObjectOfType<Oxygen>();
         endStage = false;
         oxygen.InitOxygenTank(); //산소 초기화
+    }
+
+    public void TryInteract()
+    {
+        if (interactAction != null)
+        {
+            interactAction.Invoke();
+        }
     }
 
     public void EndStage()

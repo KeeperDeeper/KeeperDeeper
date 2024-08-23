@@ -9,17 +9,18 @@ using UnityEngine.Video;
 public class StartSceneController : MonoBehaviour
 {
     [SerializeField]
+    private SceneController sceneController;
+    [SerializeField]
     private GameObject StartImage;
     [SerializeField]
     private GameObject ClickImage;
-    [SerializeField]
-    private Image fadeImage;
 
+    [SerializeField]
+    private string sceneName;
     private double videoTime;
     private bool active;
     private bool start;
     private bool end;
-    private bool plus;
 
     private void Start()
     {
@@ -54,22 +55,7 @@ public class StartSceneController : MonoBehaviour
             {
                 active = true;
                 end = true;
-                StartCoroutine(FadeIn());
-            }
-            yield return null;
-        }
-    }
-    IEnumerator FadeIn()
-    {
-        while (active && end)
-        {
-            Color color = fadeImage.color;
-            color.a += Time.deltaTime;
-            fadeImage.color = color;
-            if (fadeImage.color.a >= 1)
-            {
-                active = false;
-                SceneManager.LoadScene("MainScene");
+                sceneController.SceneChange(sceneName);
             }
             yield return null;
         }

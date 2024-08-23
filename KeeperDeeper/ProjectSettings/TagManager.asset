@@ -13,6 +13,7 @@ TagManager:
   - Wall
   - Monster
   - CloudBlock
+  - Structure
   layers:
   - Default
   - TransparentFX

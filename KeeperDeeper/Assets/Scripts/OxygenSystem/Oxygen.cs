@@ -26,7 +26,7 @@ namespace OxygenSystem
         void Update()
         {
             //굴착 플레이 시작시
-            if (true)//조건문 변경필요
+            if (!endGame)//조건문 변경필요
             {
                 ConsumptionOxygen();
             }
@@ -34,6 +34,7 @@ namespace OxygenSystem
 
         public void InitOxygenTank()
         {
+            endGame = false;
             oxygentankLevel = oxyInfo.oxygentankLv;
             maxOxyCapacity = oxyInfo.oxygenCapacity;
             oxyCapacity = maxOxyCapacity;
@@ -52,10 +53,10 @@ namespace OxygenSystem
                 else if (oxyCapacity <= 0) //잔여 산소가 없다면
                 {
                     oxyCapacity = 0; //-값이 안나오도록 0으로 초기화
+                    Managers.GameManager.EndStage(); //게임 종료 알림
+                    Managers.GameManager.blockInput = true; //키입력 안받음
                     oxyValue.ChangeOxygenValue(); //Image 산소수치 변경
                     Managers.StageManager.ResetPressure(); //압력 초기화
-                    //마을로 플레이어 복귀
-                    //굴착플레이 종료 Update문에서 돌아가지 않도록 false처리 해주기
                 }
                 countTime = 1; //시간 초기화
             }
@@ -76,7 +77,6 @@ namespace OxygenSystem
             //마을로 복귀시 산소게이지 100% 회복
             else if (endGame)
             {
-                endGame = false;
                 oxyCapacity = maxOxyCapacity;
             }
         }

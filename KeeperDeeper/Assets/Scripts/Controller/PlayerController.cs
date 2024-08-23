@@ -22,6 +22,10 @@ public class PlayerController : MonoBehaviour, IKeyInput
     public Defines.MoveStatus moveStatus;
     private Animator animator;
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);
+    }
     void Start()
     {
         Init();
@@ -76,7 +80,6 @@ public class PlayerController : MonoBehaviour, IKeyInput
                     animator.SetBool("IsRunning", false);
                     animator.SetBool("IsFalling", false);
                     animator.SetBool("IsGround", true);
-                    animator.SetBool("Digging", false);
                     break;
                 }
             case Defines.MoveStatus.MoveLeft:
@@ -153,7 +156,7 @@ public class PlayerController : MonoBehaviour, IKeyInput
                             moveStatus = Defines.MoveStatus.Idle;
                             drill.active = true;
                             drill.ActiveDrill();
-                            DiggingGround(); //Jump();
+                            DiggingGround();
                         }
                     }
                     // 인벤토리
@@ -284,7 +287,7 @@ public class PlayerController : MonoBehaviour, IKeyInput
             {
                 if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
                 {
-                    Managers.GameManager.EndStage();
+                    Managers.GameManager.EndStage(true);
                 }
             }
         }

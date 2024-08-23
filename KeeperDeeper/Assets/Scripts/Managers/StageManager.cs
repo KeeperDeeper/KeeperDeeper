@@ -20,6 +20,7 @@ namespace StageManagement
         [SerializeField]
         private Text floorText; //Text 類熱 ル晦
 
+        public bool success;
         public int playerFloor = 0; //⑷營 Ы溯檜橫 類 熱
 
         public void Init()

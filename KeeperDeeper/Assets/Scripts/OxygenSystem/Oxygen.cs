@@ -21,6 +21,8 @@ namespace OxygenSystem
 
         void Start()
         {
+            Managers.StageManager.Init();
+            Managers.GameManager.Init();
             InitOxygenTank();
         }
 
@@ -58,7 +60,7 @@ namespace OxygenSystem
                     Managers.GameManager.blockInput = true;
                     oxyCapacity = 0; //-값이 안나오도록 0으로 초기화
                     oxyValue.ChangeOxygenValue(); //Image 산소수치 변경
-                    Managers.GameManager.EndStage();
+                    Managers.GameManager.EndStage(false);
                 }
                 countTime = 1; //시간 초기화
             }

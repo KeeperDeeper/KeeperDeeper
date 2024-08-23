@@ -72,7 +72,5 @@ public class Managers : MonoBehaviour
         UIManager.Init();
         DataManager.Init();
         DialogueManager.Init();
-        GameManager.Init();
-        StageManager.Init();
     }
 }

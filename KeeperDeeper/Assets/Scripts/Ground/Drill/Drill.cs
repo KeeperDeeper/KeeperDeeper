@@ -10,7 +10,7 @@ namespace DrillObject
         public List<Block> blocks = new List<Block>();
 
         public DrillInformation drillInformation;
-
+        [SerializeField]
         private BoxCollider2D boxCollider2D;
 
         public string drillName; //드릴 이름
@@ -31,24 +31,30 @@ namespace DrillObject
         {
             if (collision.CompareTag("GroundBlock"))
             {
-                Block block = collision.GetComponent<Block>();
-                if (!blocks.Contains(block))
+                if (collision.GetComponent<Block>() != null)
                 {
-                    blocks.Add(block);
-                    if (blocks.Count > 1)
+                    Block block = collision.GetComponent<Block>();
+                    if (!blocks.Contains(block))
                     {
-                        CaculateDistance();
+                        blocks.Add(block);
+                        if (blocks.Count > 1)
+                        {
+                            CaculateDistance();
+                        }
                     }
                 }
             }
         }
         private void OnTriggerStay2D(Collider2D collision)
         {
-            if (collision.CompareTag("GroundBlock"))
+            if (collision.GetComponent<Block>() != null)
             {
-                if (blocks.Count > 0 && blocks[0].lifeTime > 0)
+                if (collision.CompareTag("GroundBlock"))
                 {
-                    blocks[0].lifeTime -= Time.deltaTime * drillPo;
+                    if (blocks.Count > 0 && blocks[0].lifeTime > 0)
+                    {
+                        blocks[0].lifeTime -= Time.deltaTime * drillPo;
+                    }
                 }
             }
         }

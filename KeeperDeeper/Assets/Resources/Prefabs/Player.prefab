@@ -172,6 +172,7 @@ MonoBehaviour:
   drill: {fileID: 8515153584719368569}
   moveSpeed: 5
   jumpPower: 5
+  moveStatus: 0
 --- !u!1 &6003771234374330173
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,7 +244,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 432885d218911af47aacec1a6f37551e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blocks: []
   drillInformation: {fileID: 11400000, guid: b5a917ae5b2e5584092655b8ddd755fa, type: 2}
+  boxCollider2D: {fileID: 6084269712494606079}
   drillName: 
   drillLv: 0
   drillPo: 0

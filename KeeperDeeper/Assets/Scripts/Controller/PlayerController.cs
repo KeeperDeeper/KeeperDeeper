@@ -6,6 +6,8 @@ using UnityEngine;
  */
 public class PlayerController : MonoBehaviour, IKeyInput
 {
+    public static PlayerController instance;
+
     [SerializeField]
     private Drill drill;
     [SerializeField]
@@ -25,6 +27,12 @@ public class PlayerController : MonoBehaviour, IKeyInput
     private void Awake()
     {
         DontDestroyOnLoad(this);
+        if (instance)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
     }
     void Start()
     {

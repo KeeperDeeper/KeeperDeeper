@@ -5,6 +5,7 @@ namespace OxygenSystem
 {
     public class Oxygen : MonoBehaviour
     {
+        public StageController stageController;
         [SerializeField]
         private OxygenInformation oxyInfo;
         [SerializeField]

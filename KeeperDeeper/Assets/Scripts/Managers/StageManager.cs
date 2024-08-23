@@ -25,6 +25,7 @@ namespace StageManagement
 
         public void Init()
         {
+            success = false;
             pressureText = GameObject.Find("CurrentPressure").GetComponent<Text>();
             floorText = GameObject.Find("CurrentFloor").GetComponent<Text>();
             ResetPressure();

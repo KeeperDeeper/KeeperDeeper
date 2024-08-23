@@ -18,7 +18,8 @@ public class PlayerController : MonoBehaviour, IKeyInput
     private bool isGround = false;
     private int collidingGroundMount = 0;
 
-    private Defines.MoveStatus moveStatus;
+    [HideInInspector]
+    public Defines.MoveStatus moveStatus;
     private Animator animator;
 
     void Start()
@@ -75,6 +76,7 @@ public class PlayerController : MonoBehaviour, IKeyInput
                     animator.SetBool("IsRunning", false);
                     animator.SetBool("IsFalling", false);
                     animator.SetBool("IsGround", true);
+                    animator.SetBool("Digging", false);
                     break;
                 }
             case Defines.MoveStatus.MoveLeft:

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: BlockLv1
   m_EditorClassIdentifier: 
   blockStr: 0
-  diggingTime: 0
-  originSprite: {fileID: 545426382, guid: 808787b0bee5bd3428bed5aa5431d925, type: 3}
+  diggingTime: 1
+  originSprite: {fileID: 21300000, guid: 808787b0bee5bd3428bed5aa5431d925, type: 3}
   crackSprite: {fileID: 21300000, guid: 9605d782461db5449b92d502a9ef1ab5, type: 3}

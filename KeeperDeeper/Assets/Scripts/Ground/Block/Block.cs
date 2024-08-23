@@ -29,12 +29,11 @@ public class Block : MonoBehaviour
         {
             if (blockInformation.blockStr != BlockStrength.Wall)
             {
-                lifeTime -= Time.deltaTime * collision.GetComponent<Drill>().drillPo; //µå¸±power¿¡ µû¸¥ ±¼Âø½Ã°£
-                if (0 < lifeTime && lifeTime <= blockInformation.diggingTime / 2)
+                if (0f < lifeTime && lifeTime <= blockInformation.diggingTime / 2)
                 {
                     spriteRender.sprite = blockInformation.crackSprite;
                 }
-                else if (lifeTime <= 0)
+                else if (lifeTime < 0f)
                 {
                     blockInformation.blockInfo.active = false;
                     this.gameObject.SetActive(false);
@@ -48,7 +47,7 @@ public class Block : MonoBehaviour
         //¶¥ÆÄ´Â °ÍÀ» ¸ØÃèÀ» ¶§
         if (collision.gameObject.CompareTag("Drill"))
         {
-            if (lifeTime > 0)
+            if (lifeTime > 0f)
             {
                 lifeTime = blockInformation.diggingTime; //½Ã°£ ¸®¼Â
                 spriteRender.sprite = blockInformation.originSprite;

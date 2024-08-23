@@ -1,3 +1,4 @@
+using DrillObject;
 using UnityEngine;
 
 /* 플레이어 컨트롤러
@@ -5,6 +6,8 @@ using UnityEngine;
  */
 public class PlayerController : MonoBehaviour, IKeyInput
 {
+    [SerializeField]
+    private Drill drill;
     [SerializeField]
     private float moveSpeed = 5.0f;
     [SerializeField]
@@ -99,6 +102,7 @@ public class PlayerController : MonoBehaviour, IKeyInput
                     animator.SetBool("IsRunning", false);
                     animator.SetBool("IsFalling", true);
                     animator.SetBool("IsGround", false);
+                    animator.SetBool("Digging",  false);
                     break;
                 }
             case Defines.MoveStatus.FallingEnd:
@@ -106,6 +110,7 @@ public class PlayerController : MonoBehaviour, IKeyInput
                     animator.SetBool("IsRunning", false);
                     animator.SetBool("IsFalling", true);
                     animator.SetBool("IsGround", true);
+                    animator.SetBool("Digging", false);
                     break;
                 }
         }
@@ -117,6 +122,10 @@ public class PlayerController : MonoBehaviour, IKeyInput
         rigidbody.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
     }
 
+    private void DiggingGround()
+    {
+        animator.SetBool("Digging", drill.active);
+    }
     private void DropItem(int itemId, int mount)
     {
         GameObject itemObj = Instantiate(Managers.DataManager.itemObj, new Vector2(transform.position.x + 0.5f, transform.position.y + 0.5f), transform.rotation);
@@ -138,7 +147,12 @@ public class PlayerController : MonoBehaviour, IKeyInput
                             return;
 
                         if (isGround)
-                            Jump();
+                        {
+                            moveStatus = Defines.MoveStatus.Idle;
+                            drill.active = true;
+                            drill.ActiveDrill();
+                            DiggingGround(); //Jump();
+                        }
                     }
                     // 인벤토리
                     if (keyCode == KeyCode.Tab)
@@ -158,7 +172,7 @@ public class PlayerController : MonoBehaviour, IKeyInput
                         Managers.UIManager.CloseUI();
                     }
                     // 상호작용. 대화중인 경우 대화를 진행하는 기능을, 그렇지 않다면 기타 상호작용을 함.
-                    if (keyCode == KeyCode.E)
+                    if (keyCode == KeyCode.F)
                     {
                         if (Managers.GameManager.isBlockingUserInput)
                         {
@@ -175,18 +189,27 @@ public class PlayerController : MonoBehaviour, IKeyInput
                 {
                     if (keyCode == KeyCode.A)
                     {
-                        if (isGround && moveStatus != Defines.MoveStatus.FallingEnd)
+                        if (isGround && moveStatus != Defines.MoveStatus.FallingEnd && !drill.active)
                             moveStatus = Defines.MoveStatus.MoveLeft;
                     }
                     if (keyCode == KeyCode.D)
                     {
-                        if (isGround && moveStatus != Defines.MoveStatus.FallingEnd)
+                        if (isGround && moveStatus != Defines.MoveStatus.FallingEnd && !drill.active)
                             moveStatus = Defines.MoveStatus.MoveRight;
                     }
                     break;
                 }
             case Defines.KeyInputType.Up:
                 {
+                    if (keyCode == KeyCode.Space)
+                    {
+                        if (isGround)
+                        {
+                            drill.active = false;
+                            drill.ActiveDrill();
+                            DiggingGround();
+                        }
+                    }
                     if (keyCode == KeyCode.A)
                     {
                         if (isGround)
@@ -236,6 +259,31 @@ public class PlayerController : MonoBehaviour, IKeyInput
             {
                 moveStatus = Defines.MoveStatus.Falling;
                 isGround = false;
+                drill.active = false;
+                drill.ActiveDrill();
+            }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("EndPoint"))
+        {
+            Managers.GameManager.blockInput = true;
+            moveStatus = Defines.MoveStatus.Idle;
+            collision.gameObject.GetComponent<CheckPoint>().ClearStage(animator);
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("EndPoint"))
+        {
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Player_Success"))
+            {
+                if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+                {
+                    Managers.GameManager.EndStage();
+                }
             }
         }
     }

@@ -8,8 +8,13 @@ public class Block : MonoBehaviour
 {
     public BlockInformation blockInformation;
     public Floor floor;
+    private SpriteRenderer spriteRender;
     public float lifeTime;
 
+    private void Awake()
+    {
+        spriteRender = GetComponent<SpriteRenderer>();
+    }
     void Start()
     {
         blockInformation.Init();
@@ -25,7 +30,11 @@ public class Block : MonoBehaviour
             if (blockInformation.blockStr != BlockStrength.Wall)
             {
                 lifeTime -= Time.deltaTime * collision.GetComponent<Drill>().drillPo; //드릴power에 따른 굴착시간
-                if (lifeTime <= 0)
+                if (0 < lifeTime && lifeTime <= blockInformation.diggingTime / 2)
+                {
+                    spriteRender.sprite = blockInformation.crackSprite;
+                }
+                else if (lifeTime <= 0)
                 {
                     blockInformation.blockInfo.active = false;
                     this.gameObject.SetActive(false);
@@ -42,6 +51,7 @@ public class Block : MonoBehaviour
             if (lifeTime > 0)
             {
                 lifeTime = blockInformation.diggingTime; //시간 리셋
+                spriteRender.sprite = blockInformation.originSprite;
             }
         }
     }

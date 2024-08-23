@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2312cf49b7017a846a4e2b00f3826d11, type: 3}
   m_Name: BlockLv2
   m_EditorClassIdentifier: 
-  blockImg: {fileID: 0}
   blockStr: 1
-  diggingTime: 0
+  diggingTime: 3
+  originSprite: {fileID: 21300000, guid: fe7da338a770a2145aee64ad4ef6ad2e, type: 3}
+  crackSprite: {fileID: 21300000, guid: c90ce808bd692834f84a9da71aa30bce, type: 3}

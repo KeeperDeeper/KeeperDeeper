@@ -13,7 +13,7 @@ public class SceneController : MonoBehaviour
 
     private void OnLevelWasLoaded(int level)
     {
-        StartCoroutine(FadeOut());
+        StartCoroutine(FadeIn());
     }
 
     private void Awake()
@@ -23,7 +23,7 @@ public class SceneController : MonoBehaviour
 
     public void SceneChange(string sceneName)
     {
-        StartCoroutine(FadeIn(sceneName));
+        StartCoroutine(FadeOut(sceneName));
     }
 
     private void LoadScene(string sceneName)
@@ -31,13 +31,14 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
-    IEnumerator FadeIn(string sceneName)
+    //페이드아웃
+    IEnumerator FadeOut(string sceneName)
     {
         Color aColor = fadeImage.color;
         aColor.a = 0;
         fadeImage.color = aColor;
 
-        while (fadeImage.color.a > 1)
+        while (fadeImage.color.a < 1)
         {
             Color color = fadeImage.color;
             color.a += Time.deltaTime;
@@ -45,21 +46,27 @@ public class SceneController : MonoBehaviour
             if (fadeImage.color.a > 1)
             {
                 LoadScene(sceneName);
+                yield break;
             }
             yield return null;
         }
     }
-    IEnumerator FadeOut()
+    //페이드인
+    IEnumerator FadeIn()
     {
         Color aColor = fadeImage.color;
         aColor.a = 1;
         fadeImage.color = aColor;
 
-        while (fadeImage.color.a <  0)
+        while (fadeImage.color.a >= 0)
         {
             Color color = fadeImage.color;
-            color.a += Time.deltaTime;
+            color.a -= Time.deltaTime;
             fadeImage.color = color;
+            if (fadeImage.color.a < 0)
+            {
+                yield break;
+            }
             yield return null;
         }
     }

@@ -43,7 +43,8 @@ public class Managers : MonoBehaviour
 
     private void Update()
     {
-        InputManager.Update();
+        if(!GameManager.blockInput)
+            InputManager.Update();
     }
 
     static private void Init()

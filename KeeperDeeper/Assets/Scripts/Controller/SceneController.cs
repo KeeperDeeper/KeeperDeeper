@@ -34,6 +34,7 @@ public class SceneController : MonoBehaviour
     //페이드아웃
     IEnumerator FadeOut(string sceneName)
     {
+        Managers.GameManager.blockInput = true;
         Color aColor = fadeImage.color;
         aColor.a = 0;
         fadeImage.color = aColor;
@@ -65,6 +66,7 @@ public class SceneController : MonoBehaviour
             fadeImage.color = color;
             if (fadeImage.color.a < 0)
             {
+                Managers.GameManager.blockInput = false;
                 yield break;
             }
             yield return null;

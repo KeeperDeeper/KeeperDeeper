@@ -14,7 +14,6 @@ public class CheckPoint : MonoBehaviour
     {
         gameObject.SetActive(true);
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -34,8 +33,12 @@ public class CheckPoint : MonoBehaviour
             }
             else if (pointKind == PointKind.Finish)
             {
-                Managers.GameManager.EndStage();
+
             }
         }
+    }
+    public void ClearStage(Animator animator)
+    {
+        animator.SetTrigger("Success");
     }
 }

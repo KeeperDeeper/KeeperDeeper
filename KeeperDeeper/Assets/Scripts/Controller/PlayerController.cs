@@ -174,7 +174,7 @@ public class PlayerController : MonoBehaviour, IKeyInput
                         Managers.UIManager.CloseUI();
                     }
                     // 상호작용. 대화중인 경우 대화를 진행하는 기능을, 그렇지 않다면 기타 상호작용을 함.
-                    if (keyCode == KeyCode.E)
+                    if (keyCode == KeyCode.F)
                     {
                         if (Managers.GameManager.isBlockingUserInput)
                         {
@@ -261,6 +261,29 @@ public class PlayerController : MonoBehaviour, IKeyInput
             {
                 moveStatus = Defines.MoveStatus.Falling;
                 isGround = false;
+            }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("EndPoint"))
+        {
+            Managers.GameManager.blockInput = true;
+            moveStatus = Defines.MoveStatus.Idle;
+            collision.gameObject.GetComponent<CheckPoint>().ClearStage(animator);
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("EndPoint"))
+        {
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Player_Success"))
+            {
+                if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+                {
+                    Managers.GameManager.EndStage();
+                }
             }
         }
     }

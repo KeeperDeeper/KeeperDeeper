@@ -9,9 +9,11 @@ public class GameManager : IManagers
 
     public Action interactAction;
     public bool isBlockingUserInput;
+    public bool blockInput;
 
     public void Init()
     {
+        blockInput = false;
         isBlockingUserInput = false;
         oxygen = UnityEngine.Object.FindObjectOfType<Oxygen>();
         endStage = false;

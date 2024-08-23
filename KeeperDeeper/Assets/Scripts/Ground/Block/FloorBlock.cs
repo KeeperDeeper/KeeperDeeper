@@ -3,7 +3,10 @@ using UnityEngine;
 public class FloorBlock : MonoBehaviour
 {
     public int floorNum;
-
+    private void Awake()
+    {
+        
+    }
     private void Start()
     {
         this.gameObject.SetActive(true);

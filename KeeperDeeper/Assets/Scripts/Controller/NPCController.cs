@@ -6,6 +6,8 @@ using static Defines;
 
 public class NPCController : MonoBehaviour
 {
+    Animator animator;
+
     public float moveSpeed = 1.0f;
 
     [SerializeField]
@@ -17,6 +19,10 @@ public class NPCController : MonoBehaviour
     private Vector3 initPosition;
     private float moveLimit = 4.0f;
 
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
     void Start()
     {
         initPosition = transform.position;
@@ -52,11 +58,14 @@ public class NPCController : MonoBehaviour
         {
             case MoveStatus.Idle:
                 {
+                    animator.SetBool("Move",false);
                     break;
                 }
 
             case MoveStatus.MoveLeft:
                 {
+                    animator.SetBool("Move", true);
+                    npcSprite.flipX = false;
                     if (Vector2.Distance(initPosition, transform.position) >= moveLimit && initPosition.x > transform.position.x)
                     {
                         moveStatus = MoveStatus.MoveRight;
@@ -68,6 +77,8 @@ public class NPCController : MonoBehaviour
 
             case MoveStatus.MoveRight:
                 {
+                    animator.SetBool("Move", true);
+                    npcSprite.flipX = true;
                     if (Vector2.Distance(initPosition, transform.position) >= moveLimit && initPosition.x < transform.position.x)
                     {
                         moveStatus = MoveStatus.MoveLeft;

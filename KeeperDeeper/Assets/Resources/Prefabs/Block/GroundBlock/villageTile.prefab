@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3268213081396309656}
   m_Layer: 0
   m_Name: villageTile
-  m_TagString: Untagged
+  m_TagString: GroundBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

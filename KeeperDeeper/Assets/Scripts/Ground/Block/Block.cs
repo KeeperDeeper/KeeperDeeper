@@ -29,7 +29,6 @@ public class Block : MonoBehaviour
         {
             if (blockInformation.blockStr != BlockStrength.Wall)
             {
-                lifeTime -= Time.deltaTime * collision.GetComponent<Drill>().drillPo; //µå¸±power¿¡ µû¸¥ ±¼Âø½Ã°£
                 if (0f < lifeTime && lifeTime <= blockInformation.diggingTime / 2)
                 {
                     spriteRender.sprite = blockInformation.crackSprite;

@@ -103,8 +103,6 @@ public class PlayerController : MonoBehaviour, IKeyInput
                     animator.SetBool("IsFalling", true);
                     animator.SetBool("IsGround", false);
                     animator.SetBool("Digging",  false);
-                    drill.active = false;
-                    drill.ActiveDrill();
                     break;
                 }
             case Defines.MoveStatus.FallingEnd:
@@ -261,6 +259,8 @@ public class PlayerController : MonoBehaviour, IKeyInput
             {
                 moveStatus = Defines.MoveStatus.Falling;
                 isGround = false;
+                drill.active = false;
+                drill.ActiveDrill();
             }
         }
     }

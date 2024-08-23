@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 7767907974914697577}
   - component: {fileID: 7767907974914697578}
   - component: {fileID: 3316110526271870268}
+  - component: {fileID: -3660848696533146341}
   m_Layer: 0
-  m_Name: sign
-  m_TagString: Untagged
+  m_Name: Sign
+  m_TagString: Structure
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,3 +134,16 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &-3660848696533146341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7767907974914697579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a2c79be9bb772247957f3f7e11cd69c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneName: Stage1

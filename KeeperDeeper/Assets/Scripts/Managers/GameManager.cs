@@ -33,5 +33,7 @@ public class GameManager : IManagers
         endStage = true; //스테이지 종료
         oxygen.endGame = endStage; //게임종료 정보 넘기기
         oxygen.RecoveryOxygen();  //산소통 초기화
+        Managers.StageManager.ResetPressure(); //압력 초기화
+        //스테이지 종료 UI띄우기
     }
 }

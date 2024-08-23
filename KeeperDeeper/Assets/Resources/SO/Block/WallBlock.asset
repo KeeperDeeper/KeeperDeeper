@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: WallBlock
   m_EditorClassIdentifier: 
   blockStr: 4
-  diggingTime: 0
+  diggingTime: 9
+  originSprite: {fileID: 21300000, guid: 81852e1c753929546a6b67a8dee5e9f5, type: 3}
+  crackSprite: {fileID: 21300000, guid: 81852e1c753929546a6b67a8dee5e9f5, type: 3}

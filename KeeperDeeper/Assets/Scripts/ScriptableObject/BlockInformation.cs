@@ -17,6 +17,8 @@ public class BlockInformation : ScriptableObject
     public BlockInfo blockInfo;
     public BlockStrength blockStr;
     public float diggingTime;
+    public Sprite originSprite;
+    public Sprite crackSprite;
 
     //블럭 정보 초기화
     public void Init()
